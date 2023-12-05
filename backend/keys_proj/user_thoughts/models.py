@@ -4,6 +4,6 @@ from django.utils import timezone
 # Create your models here.
 
 class User_thoughts(models.Model):
-    user_id = models.ForeignKey(Users, related_name='user_id')
+    user_id = models.ForeignKey(Users, related_name='user_thoughts', on_delete=models.CASCADE)
     thoughts = models.TextField(blank=False)
     date = models.DateTimeField(default=timezone.now)

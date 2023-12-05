@@ -4,5 +4,5 @@ from django.utils import timezone
 # Create your models here.
 
 class User_likes(models.Model):
-    user_id = models.ForeignKey(Users, related_name='user_id')
+    user_id = models.ForeignKey(Users, related_name='user_likes', on_delete=models.CASCADE)
     user_houses = models.PositiveIntegerField(blank=True, null=True)
