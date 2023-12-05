@@ -3,13 +3,22 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 function NavBar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const housesLink = isLoggedIn ? '/houses' : '/'; //Check if user is loggedin and if so, connect to main page: houses. If not, link to signup/login.
+  const profileLink = isLoggedIn ? '/profile' : '/'; //Check if user is loggedin and if so, connect to the user profile. If not, link to signup/login.
+
+  const logLink = isLoggedIn ? '/' : 'login'; //will likely need to be altered for variations like "signup" instead of "login"/"logout"
+  const logWords = isLoggedIn ? 'Log Out' : 'Log In'; //^^
+  
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Link to="/">
+        <Link to={housesLink}>
         <Navbar.Brand>
           <img
             alt="picture"
@@ -27,12 +36,12 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text className='me-3'>
-              Signed in as: <Link to="profile">Mark Otto</Link>
+              Signed in as: <Link to={profileLink}>Mark Otto</Link>
             </Navbar.Text>
           </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
             <Navbar.Text className="me-3">
-              <Link to="signup_login">Log Out</Link>
+              <Link to={logLink}>{logWords}</Link>
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar.Collapse>

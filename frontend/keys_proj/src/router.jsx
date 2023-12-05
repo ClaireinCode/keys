@@ -21,14 +21,18 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Signup_LoginLandingPage/>,
+      },
+      {
+        path: "houses",
         element: <HousingPage/>,
       },
       {
-        path: "housing_contact",
+        path: "house_contact",
         element: <HousingContactPage/>,
       },
       {
-        path: "housing_details",
+        path: "house_details",
         element: <HousingDetailsPage/>,
       },
       {
@@ -62,13 +66,9 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: "signup_login",
-        element: <Signup_LoginLandingPage/>,
-      },
-      {
         path: "signup",
         element: <SignupPage/>,
-      }
+      },
     ],
   },
 ]);
