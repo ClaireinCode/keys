@@ -18,14 +18,21 @@ function NavBar() {
   const signedInStatus = isLoggedIn ? 'Signed in as:' : 'Not signed in.'; //^^
   const namedUser = isLoggedIn ? currentUser : ''; //^^
   
+  const navbarStyle = {
+    backgroundColor: 'rgba(255, 255, 255, 0.6)',
+    position: 'fixed',
+    width: '100%',
+    zIndex: '1000',
+  };
+
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="navbar" style={navbarStyle}>
       <Container>
         <Link to={housesLink}>
         <Navbar.Brand>
           <img
             alt="picture"
-            src="https://imgs.search.brave.com/dbbI_LAHQuZ75Zzuw8b9kgNPhu8t1jw_8TIL_7z5LcY/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuY3JlYXRpdmVt/YXJrZXQuY29tLzAu/MS4wL3BzLzE1Mzk4/NjUvOTAvNjAvbTIv/ZnBudy93bTAva2V5/czJfY20tLmpwZz8x/NDcwNzYwMjg4JnM9/N2Q3NjdjYWE4Njg4/MzZlZTgwZTk0ZTRi/MGZjODVkOTA"
+            src="src/assets/noun-key-679919.svg"
             width="30"
             height="30"
             className="d-inline-block align-top"
