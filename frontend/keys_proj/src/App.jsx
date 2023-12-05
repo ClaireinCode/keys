@@ -9,7 +9,6 @@ function App() {
   return (
     <>
       <NavBar/>
-      <h1>Hey all</h1>
       <Outlet/>
 
     </>
