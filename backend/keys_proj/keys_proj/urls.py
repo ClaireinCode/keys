@@ -23,5 +23,5 @@ urlpatterns = [
     path('api/v1/user_likes/', include('user_likes.urls')),
     path('api/v1/user_preferences/', include('user_preferences.urls')),
     path('api/v1/user_thoughts/', include('user_thoughts.urls')),
-    path('api/v1/users/', include('users.urls'))
+    path('api/v1/users/', include('users.urls')),
 ]
