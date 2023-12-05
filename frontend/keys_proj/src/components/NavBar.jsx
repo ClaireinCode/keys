@@ -7,13 +7,16 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 function NavBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [currentUser, setCurrentUser] = useState("Mark Otto")
 
   const housesLink = isLoggedIn ? '/houses' : '/'; //Check if user is loggedin and if so, connect to main page: houses. If not, link to signup/login.
   const profileLink = isLoggedIn ? '/profile' : '/'; //Check if user is loggedin and if so, connect to the user profile. If not, link to signup/login.
 
   const logLink = isLoggedIn ? '/' : 'login'; //will likely need to be altered for variations like "signup" instead of "login"/"logout"
   const logWords = isLoggedIn ? 'Log Out' : 'Log In'; //^^
+  const signedInStatus = isLoggedIn ? 'Signed in as:' : 'Not signed in.'; //^^
+  const namedUser = isLoggedIn ? currentUser : ''; //^^
   
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -36,7 +39,7 @@ function NavBar() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text className='me-3'>
-              Signed in as: <Link to={profileLink}>Mark Otto</Link>
+              {signedInStatus} <Link to={profileLink}>{namedUser}</Link>
             </Navbar.Text>
           </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
