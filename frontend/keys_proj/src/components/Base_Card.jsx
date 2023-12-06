@@ -1,14 +1,15 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useState, useEffect } from 'react';
+import TinderCard from 'react-tinder-card';
 
 
-function Base_Card({style, cooling, heating, fireplaces, sqft, baths_full, photos, laundry_features, lot_description, pool, bedrooms, interior_features, exterior_features, parking, water, view, year_built, acres, list_price}) {
-    const [fireplace_check, set_fireplace_check] = useState("")
-    const [pool_check, set_pool_check] = useState("")
-    const [laundry_check, set_laundry_check] = useState("red")
+function Base_Card({style, cooling, heating, fireplaces, sqft, baths_full, photos, laundry_features, lot_description, pool, bedrooms, interior_features, exterior_features, parking, water, view, year_built, acres, list_price, cardData, onSwipeLeft, onSwipeRight, likes, dislikes}) {
+    const [fireplace_check, set_fireplace_check] = useState("");
+    const [pool_check, set_pool_check] = useState("");
+    const [laundry_check, set_laundry_check] = useState("red");
 
-
+        //refactor possibly by placing all elements in a list and mapping/filtering through them for existence and preference. Possibly group lists by similar traits to make it easier to populate.
     const fireplace_exists = () => {
         if (fireplaces === null){
             set_fireplace_check("hidden")
@@ -42,60 +43,79 @@ function Base_Card({style, cooling, heating, fireplaces, sqft, baths_full, photo
 
     //////////////////////////////////////////////SWIPING MECHANIC///////////////////////////////////////////////////////
     
+    const onSwipe = (direction) => {
+        console.log("you swiped:", direction)
+        direction === 'left' ? onSwipeLeft() : onSwipeRight();
+        console.log("check", direction)
+    };
+
+    const onCardLeftScreen = (myIdentifier) => {
+        console.log(myIdentifier, 'left the screen')
+    };
+
+    useEffect(() => {
+        console.log('Liked_Card re-rendered'); // Log when the component re-renders
+    }, [likes, dislikes]);
 
     return (
-    <Card style={{ width: '25rem' }}>
-      <Card.Img variant="top" src={`src/assets/chicago5.jpeg`}/>
-      <Card.Body>
-        <Card.Title>{list_price}</Card.Title>
-        <div>
-        <div>
-            <Button>
-                {baths_full} Bathrooms
-            </Button>
-            <Button>
-                {bedrooms} Bedrooms
-            </Button>
-            <Button>
-                {style}
-            </Button>
-            <Button>
-                {cooling}
-            </Button>
-            <Button>
-                {heating}
-            </Button>
-            <Button>
-                {sqft}sqft
-            </Button>
-            <Button>
-                {view} View
-            </Button>
-            <Button style={{visibility:fireplace_check, backgroundColor:'gold', color:'whitesmoke'}}>
-                Fireplace
-            </Button>
-            <Button style={{visibility:'hidden'}}>
-                {interior_features}
-            </Button>
-            <Button style={{visibility:'hidden'}}>
-                {exterior_features}
-            </Button>
-            <Button>
-                {year_built}
-            </Button>
-            <Button style={{ backgroundColor:laundry_check, color:'whitesmoke'}}>
-                Laundry
-            </Button>
-            <Button style={{visibility:pool_check, backgroundColor:'gold', color:'whitesmoke'}}>
-                Pool
-            </Button>
-        </div>
-        </div>
-        <Card.Text>
-            {/* thoughts go here */}
-        </Card.Text>
-      </Card.Body>
-    </Card>
+        <TinderCard
+        onSwipe={onSwipe} 
+        onCardLeftScreen={() => onCardLeftScreen('fooBar')} 
+        preventSwipe={['up', 'down']}
+        >
+            <Card style={{ width: '25rem' }}>
+            <Card.Img variant="top" src={`/src/assets/chicago5.jpeg`}/>
+            <Card.Body>
+                <Card.Title>{list_price}</Card.Title>
+                <div>
+                <div>
+                    <Button>
+                        {baths_full} Bathrooms
+                    </Button>
+                    <Button>
+                        {bedrooms} Bedrooms
+                    </Button>
+                    <Button>
+                        {style}
+                    </Button>
+                    <Button>
+                        {cooling}
+                    </Button>
+                    <Button>
+                        {heating}
+                    </Button>
+                    <Button>
+                        {sqft}sqft
+                    </Button>
+                    <Button>
+                        {view} View
+                    </Button>
+                    <Button style={{visibility:fireplace_check, backgroundColor:'gold', color:'whitesmoke'}}>
+                        Fireplace
+                    </Button>
+                    <Button style={{visibility:'hidden'}}>
+                        {interior_features}
+                    </Button>
+                    <Button style={{visibility:'hidden'}}>
+                        {exterior_features}
+                    </Button>
+                    <Button>
+                        {year_built}
+                    </Button>
+                    <Button style={{ backgroundColor:laundry_check, color:'whitesmoke'}}>
+                        Laundry
+                    </Button>
+                    <Button style={{visibility:pool_check, backgroundColor:'gold', color:'whitesmoke'}}>
+                        Pool
+                    </Button>
+                </div>
+                </div>
+                <Card.Text>
+                    {/* thoughts go here */}
+                </Card.Text>
+            </Card.Body>
+            </Card>
+        </TinderCard>
   );
 }
 

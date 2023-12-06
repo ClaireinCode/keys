@@ -25,38 +25,6 @@ const ProfileHousingPage = () => {
             getHouses()
         }, [])
 
-    const handleSwipeLeft = () => {
-        if (houses.length > 0){
-            setDislikes((dislikes) => [...dislikes, houses[0].mlsId]);
-            setHouses(houses.slice(1));
-        };
-    };
-    useEffect(() => {
-        // Log the updated likes whenever it changes
-        console.log("Updated likes in useEffect:", likes);
-        console.log("and", houses)
-    }, [likes]);
-
-    const handleSwipeRight = () => {
-        if (houses.length > 0){
-            console.log("current inventory of houses", houses);
-            console.log("current house id", houses[0].mlsId);
-            
-            // Log the current state of likes before the update
-            console.log("current likes before update", likes);
-    
-            setLikes((prevLikes) => [...prevLikes, houses[0].mlsId]);
-    
-            // Log the updated likes and houses state
-            console.log("updated likes", likes);
-            
-            setHouses(houses.slice(1));
-    
-            console.log('remaining houses', houses);
-            console.log('likes after update', likes);
-        };
-    };
-
     return (
         <>
         LIKES
