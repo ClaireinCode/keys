@@ -2,10 +2,13 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useState, useEffect } from 'react';
 
+
 function Base_Card({style, cooling, heating, fireplaces, sqft, baths_full, photos, laundry_features, lot_description, pool, bedrooms, interior_features, exterior_features, parking, water, view, year_built, acres, list_price}) {
     const [fireplace_check, set_fireplace_check] = useState("")
     const [pool_check, set_pool_check] = useState("")
     const [laundry_check, set_laundry_check] = useState("red")
+
+
     const fireplace_exists = () => {
         if (fireplaces === null){
             set_fireplace_check("hidden")
@@ -36,6 +39,9 @@ function Base_Card({style, cooling, heating, fireplaces, sqft, baths_full, photo
         pool_exists()
         laundry_exists()
     }, [])
+
+    //////////////////////////////////////////////SWIPING MECHANIC///////////////////////////////////////////////////////
+    
 
     return (
     <Card style={{ width: '25rem' }}>

@@ -25,49 +25,47 @@ const router = createBrowserRouter([
         element: <Signup_LoginLandingPage/>,
       },
       {
-        path: "houses",
+        path: "houses/",
         element: <HousingPage/>,
       },
       {
-        path: "house_contact",
+        path: "house_contact/",
         element: <HousingContactPage/>,
       },
       {
-        path: "house_details",
+        path: "house_details/",
         element: <HousingDetailsPage/>,
       },
       {
-        path: "login",
+        path: "login/",
         element: <LoginPage/>,
       },
       {
-        path: "preferences",
+        path: "preferences/",
         element: <PreferencesPage/>,
       }, 
       {
-        path: "profile",
+        path: "profile/",
         element: <ProfilePage/>,
-        children: [
-            {
-                path: "account_details",
-                element: <ProfileAccountDetailsPage/>,
-            },
-            {
-                path: "hidden_housing",
-                element: <ProfileHiddenHousingPage/>,
-            },
-            {
-                path: "housing",
-                element: <ProfileHousingPage/>,
-            },
-            {
-                path: "thoughts",
-                element: <ProfileThoughtsPage/>,
-            },
-        ]
       },
       {
-        path: "signup",
+          path: "account_details/",
+          element: <ProfileAccountDetailsPage/>,
+      },
+      {
+          path: "hidden_housing/",
+          element: <ProfileHiddenHousingPage/>,
+      },
+      {
+          path: "your_housing/",
+          element: <ProfileHousingPage/>,
+      },
+      {
+          path: "thoughts/",
+          element: <ProfileThoughtsPage/>,
+      },
+      {
+        path: "signup/",
         element: <SignupPage/>,
       },
     ],
