@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { useSwipeable } from 'react-swipeable';
+import TinderCard from 'react-tinder-card';
 
 function Liked_Card({ cardData, onSwipeLeft, onSwipeRight }) {
     const handleSwipe = (direction) => {
@@ -9,12 +9,12 @@ function Liked_Card({ cardData, onSwipeLeft, onSwipeRight }) {
 
 
   return (
-    <Swipeable
+    <TinderCard
       onSwipedLeft={() => handleSwipe('left')}
       onSwipedRight={() => handleSwipe('right')}
       >
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={cardData.photos} />
+      <Card.Img variant="top" src={"/Users/claire/Documents/code_projects/KEYS/keys/frontend/keys_proj/src/assets/chicago1.jpeg"} />
       <Card.Body>
         <Card.Title>{cardData.originalListPrice}</Card.Title>
         <Card.Text>
@@ -32,7 +32,7 @@ function Liked_Card({ cardData, onSwipeLeft, onSwipeRight }) {
           </Button>
         </Card.Footer>
     </Card>
-    </Swipeable>
+    </TinderCard>
   );
 }
 
