@@ -4,6 +4,7 @@ import HousingContactPage from './pages/HousingContactPage';
 import HousingDetailsPage from './pages/HousingDetailsPage';
 import HousingPage from './pages/HousingPage';
 import LoginPage from './pages/LoginPage';
+import NotFoundPage from './pages/NotFoundPage';
 import PreferencesPage from './pages/PreferencesPage';
 import ProfileAccountDetailsPage from './pages/ProfileAccountDetailsPage';
 import ProfileHiddenHousingPage from './pages/ProfileHiddenHousingPage';
@@ -70,6 +71,7 @@ const router = createBrowserRouter([
         element: <SignupPage/>,
       },
     ],
+    errorElement: <NotFoundPage/>
   },
 ]);
 
