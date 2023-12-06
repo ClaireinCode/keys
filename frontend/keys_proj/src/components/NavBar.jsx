@@ -32,7 +32,7 @@ function NavBar() {
         <Navbar.Brand>
           <img
             alt="picture"
-            src="src/assets/noun-key-679919.svg"
+            src="/src/assets/noun-key-679919.svg"
             width="30"
             height="30"
             className="d-inline-block align-top"

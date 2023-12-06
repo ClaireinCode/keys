@@ -1,22 +1,32 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import TinderCard from 'react-tinder-card';
+import { useEffect } from 'react';
 
-function Liked_Card({ cardData, onSwipeLeft, onSwipeRight }) {
-    const handleSwipe = (direction) => {
+function Liked_Card({ cardData, onSwipeLeft, onSwipeRight, likes, dislikes}) {
+    const onSwipe = (direction) => {
+      console.log("you swiped:", direction)
       direction === 'left' ? onSwipeLeft() : onSwipeRight();
+      console.log("check", direction)
     };
 
+    const onCardLeftScreen = (myIdentifier) => {
+      console.log(myIdentifier, 'left the screen')
+    }
+    useEffect(() => {
+      console.log('Liked_Card re-rendered'); // Log when the component re-renders
+  }, [likes, dislikes]);
 
   return (
     <TinderCard
-      onSwipedLeft={() => handleSwipe('left')}
-      onSwipedRight={() => handleSwipe('right')}
+      onSwipe={onSwipe} 
+      onCardLeftScreen={() => onCardLeftScreen('fooBar')} 
+      preventSwipe={['up', 'down']}
       >
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={"/Users/claire/Documents/code_projects/KEYS/keys/frontend/keys_proj/src/assets/chicago1.jpeg"} />
+      <Card.Img variant="top" src={"/src/assets/chicago1.jpeg"} />
       <Card.Body>
-        <Card.Title>{cardData.originalListPrice}</Card.Title>
+        <Card.Title>{cardData.mlsId}</Card.Title>
         <Card.Text>
           Some quick example text to build on the card title and make up the
           bulk of the card's content.
@@ -24,10 +34,10 @@ function Liked_Card({ cardData, onSwipeLeft, onSwipeRight }) {
         <Button variant="primary">Go somewhere</Button>
       </Card.Body>
       <Card.Footer>
-          <Button variant="danger" onClick={() => handleSwipe('left')}>
+          <Button variant="danger" onClick={() => onSwipe('left')}>
             Dislike
           </Button>
-          <Button variant="success" onClick={() => handleSwipe('right')}>
+          <Button variant="success" onClick={() => onSwipe('right')}>
             Like
           </Button>
         </Card.Footer>
