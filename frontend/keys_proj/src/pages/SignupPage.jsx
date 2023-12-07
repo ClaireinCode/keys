@@ -26,7 +26,7 @@ const SignupPage = () => {
         localStorage.setItem("token", token);
         localStorage.setItem("email", user_email);
 
-        navigate("/houses");
+        navigate("/preferences");
     }
 
     return (
