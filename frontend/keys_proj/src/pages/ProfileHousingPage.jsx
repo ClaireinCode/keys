@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Liked_Card from '../components/Liked_Cards';
 import axios from 'axios';
-import { useOutletContext } from 'react-router'
+import { useOutletContext } from 'react-router';
 
 const ProfileHousingPage = () => {
     const [houses, setHouses] = useState([]);

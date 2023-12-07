@@ -1,6 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import { useState, useEffect } from 'react';
 import TinderCard from 'react-tinder-card';
+import Carousel from 'react-bootstrap/Carousel';
 
 
 function Base_Card({mlsId, style, cooling, heating, fireplaces, sqft, baths_full, photos, laundry_features, lot_description, pool, bedrooms, interior_features, exterior_features, parking, water, view, year_built, acres, list_price, cardData, onSwipeLeft, onSwipeRight, likes, dislikes, fullAddress}) {
@@ -100,7 +101,13 @@ function Base_Card({mlsId, style, cooling, heating, fireplaces, sqft, baths_full
         swipeThreshold={100}
         >
             <Card style={{ width: '25rem' }}>
-            <Card.Img variant="top" src={`${photos[0]}`} draggable={false} onClick={onImageClick}/>
+            <Carousel>
+                {photos.map((photo, index) => (
+                <Carousel.Item key={index}>
+                    <img className="d-block w-100" src={photo} alt={`Slide ${index}`} draggable={false}/>
+                </Carousel.Item>
+                ))}
+            </Carousel>
             <Card.Body>
                 <Card.Title>{fullAddress} | {year_built}</Card.Title>
                 <div>

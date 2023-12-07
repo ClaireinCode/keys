@@ -114,3 +114,64 @@ div.card-title {
     color: #011164;
     border-style: solid;
 }
+
+#signup_div {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#form_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2d2b6;
+    height: 600px;
+    width: 500px;
+    padding: 70px;
+    border-radius: 40px;
+    overflow: hidden;
+}
+
+#signup_form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin: 10px;
+    border: none;
+    padding: 7px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+#signup_title {
+    color: #bf7a7a;
+}
+
+#signup_title_div {
+    background-color: white;
+    opacity: 30%;
+    width: 500px;
+    height: 50px;
+    position: fixed;
+    left: 440px;
+    top: 368px;
+}
+
+.signup_input {
+    margin-bottom: 10px;
+    background-color: whitesmoke;
+}
+
+#signup_button{
+    color:#bf7a7a
+}
+
+#signup_button:hover {
+    background-color: #bf7a7a;
+    color: whitesmoke;
+}
