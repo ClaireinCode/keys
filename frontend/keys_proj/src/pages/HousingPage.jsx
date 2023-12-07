@@ -61,7 +61,7 @@ const HousingPage = () => {
         return (
             <>
             <div id='housing_page'>
-            <div className='my-card'>
+            <div>
                 {houses.length > 0 ? (
                         <Base_Card
                         key={houses[0].mlsId}
@@ -96,7 +96,7 @@ const HousingPage = () => {
                         mls_id={houses[0].mlsId}
                         terms={houses[0].terms}
                         special_conditions={houses[0].specialListingConditions}
-                        list_price={houses[0].originalListPrice}
+                        list_price={houses[0].property.listPrice} 
                         fullAddress={houses[0].address.full}
                         zipcode={houses[0].address.postalCode}
                         street_name={houses[0].address.streetName}
@@ -115,7 +115,8 @@ const HousingPage = () => {
                         setDislikes={setDislikes}
                         dislikes={dislikes}
                         setLikes={setLikes}
-                        likes={likes}/>
+                        likes={likes}
+                        id='base_card'/>
                 ) : (
                     <div> No more cards! </div>
                 )}

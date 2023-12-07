@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react';
-import './App.css';
 import { Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar';
 
