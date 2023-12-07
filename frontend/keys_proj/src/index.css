@@ -78,6 +78,8 @@ div.card {
     max-height: 700px;
     min-width: 600px;
     border: none;
+    border-radius: 30px;
+    overflow: hidden;
 }
 
 div.card-body {
@@ -85,6 +87,8 @@ div.card-body {
     flex-direction: column;
     overflow: wrap; 
 }
+
+
 
 div.card-title {
     display: flex;
