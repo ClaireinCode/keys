@@ -53,11 +53,11 @@ const router = createBrowserRouter([
           element: <ProfileAccountDetailsPage/>,
       },
       {
-          path: "hidden_housing/",
+          path: "hidden_houses/",
           element: <ProfileHiddenHousingPage/>,
       },
       {
-          path: "your_housing/",
+          path: "your_houses/",
           element: <ProfileHousingPage/>,
       },
       {

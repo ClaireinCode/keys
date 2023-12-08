@@ -150,7 +150,7 @@ input {
     background-color: whitesmoke;
 }
 
-#signup_title, #login_title{
+#signup_title, #login_title, #profile_div{
     color: #bf7a7a;
 }
 
@@ -190,4 +190,50 @@ input {
     position: fixed;
     left: 440px;
     top: 387px;
+}
+
+#profile_div {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#menu_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2d2b6;
+    height: 600px;
+    width: 500px;
+    padding: 70px;
+    border-radius: 40px;
+    overflow: hidden;
+    position: fixed;
+}
+
+#profile_main_buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 600px;
+    width: 400px;
+}
+
+#profile_hidden {
+    margin-top: 950px;
+}
+
+.profile_buttons {
+    background-color: #bf7a7a;
+    border: none;
+    padding: none;
+    color: whitesmoke;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 8px;
+    font-size:large;
 }
