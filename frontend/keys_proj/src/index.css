@@ -117,14 +117,15 @@ div.card-title {
     border-style: solid;
 }
 
-#signup_div, #login_div {
+#signup_div, #login_div, #account_div {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
-#form_div {
+#form_div, #account_deets_div {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -150,7 +151,7 @@ input {
     background-color: whitesmoke;
 }
 
-#signup_title, #login_title, #profile_div{
+#signup_title, #login_title, #profile_div, #account_title{
     color: #bf7a7a;
 }
 
@@ -236,4 +237,14 @@ input {
     padding-right: 20px;
     border-radius: 8px;
     font-size:large;
+}
+
+#profile_link_div {
+    margin-left: 610px;
+}
+
+#profile_link {
+    text-decoration: none;
+    color: #bf7a7a;
+    font-size: x-large;
 }
