@@ -1,11 +1,12 @@
-import { useNavigate } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 import { api } from "../utilities.jsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const SignupPage = () => {
     const [email, set_email] = useState("")
     const [password, set_password] = useState("")
     const [display_name, set_display_name] = useState("")
+    const {user, setUser} = useOutletContext()
 
     const navigate = useNavigate();
 
@@ -13,21 +14,38 @@ const SignupPage = () => {
         e.preventDefault();
         const data = { email, password, display_name };
         const response = await api
-            .post("v1/users/signup", data)
-            .catch(err => console.log(`signup error ${err}`));
+            .post("users/signup/", {
+                "email":email,
+                "password":password,
+                "display_name":display_name
+            })
+            if (response.status === 201){
+                setUser(response.data.user);
+                localStorage.setItem("token", response.data.token)
+                api.defaults.headers.common["Authorization"] = `Token ${response.data.token}`
+                navigate("/preferences");
+                
+            }else {
+                alert("Sign up failed!");
+                navigate("/")
+            }
         
-        const user_email = response.data.email;
-        const token = response.data.token;
-        const username = response.data.username;
+        // const user_email = response.data.email;
+        // const token = response.data.token;
+        // const username = response.data.username;
 
-        console.log(`signup success: email: ${user_email}, token: ${token}, display name: ${display_name}`);
+        // console.log(`signup success: email: ${user_email}, token: ${token}, display name: ${display_name}`);
 
-        api.defaults.headers.common["Authorization"] = `Token ${token}`
-        localStorage.setItem("token", token);
-        localStorage.setItem("email", user_email);
-
-        navigate("/preferences");
+        // api.defaults.headers.common["Authorization"] = `Token ${token}`
+        // localStorage.setItem("token", token);
+        // localStorage.setItem("email", user_email);
     }
+
+    useEffect(() => {
+        if (user) {
+            navigate("/houses")
+        }
+    })
 
     return (
         <>
@@ -39,18 +57,21 @@ const SignupPage = () => {
                     <input
                     type="text"
                     placeholder="display name"
+                    value={display_name}
                     onChange={(e) => set_display_name(e.target.value)}
                     className="signup_input"
                     />
                     <input
                     type="text"
                     placeholder="email"
+                    value={email}
                     onChange={(e) => set_email(e.target.value)}
                     className="signup_input"
                     />
                     <input
-                    type="text"
+                    type="password"
                     placeholder="password"
+                    value={password}
                     onChange={(e) => set_password(e.target.value)}
                     className="signup_input"
                     />

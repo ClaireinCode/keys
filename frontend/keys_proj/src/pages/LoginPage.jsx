@@ -1,28 +1,44 @@
 import { api } from "../utilities.jsx";
-import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useNavigate, useOutletContext } from "react-router";
+import { useState, useEffect } from "react";
 
 const LoginPage = () => {
     const [email, set_email] = useState("")
     const [password, set_password] = useState("")
+    const {user, setUser} = useOutletContext()
 
     const navigate = useNavigate();
 
     const login = async (e) => {
         e.preventDefault();
         let response = await api.post("users/login/", {
-            email: email,
-            password: password,
+            'email': email,
+            'password': password,
         });
-        console.log(response);
-        let token = response.data.token;
-        let user = response.data.users;
+        if (response.status === 200) {
+            setUser(response.data.user);
+            localStorage.setItem("token", response.data.token);
+            api.defaults.headers.common["Authorization"] = `Token ${response.data.token}`;
+            navigate("/houses");
+        }
+        else {
+            alert("Login failed!")
+            navigate("/login")
+        }
+        // console.log(response);
+        // let token = response.data.token;
+        // let user = response.data.users;
 
-        localStorage.setItem("token", token);
-        api.defaults.headers.common["Authorization"] = `Token ${token}`;
-        setUser(user);
-        navigate("/houses");
+        
+        // setUser(user);
+        
     }
+
+    useEffect(() => {
+        if (user) {
+            navigate("/houses")
+        }
+    })
 
     return (
         <>
