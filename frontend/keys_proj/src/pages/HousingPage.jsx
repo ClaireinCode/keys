@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Base_Card from '../components/Base_Card.jsx';
-import { useOutletContext } from 'react-router';
+import { useOutletContext, useNavigate } from 'react-router';
 
 const HousingPage = () => {
     const [houses, setHouses] = useState([]);
-    const {likes, setLikes, setDislikes, dislikes} = useOutletContext();
+    const {likes, setLikes, setDislikes, dislikes, isLoggedIn} = useOutletContext();
    
     const apiKey = 'simplyrets';
     const apiSecret = 'simplyrets'
@@ -24,6 +24,14 @@ const HousingPage = () => {
         useEffect (() => {
             getHouses()
         }, [])
+
+        const navigate = useNavigate()
+
+        useEffect(() => {
+            if (isLoggedIn === false) {
+                navigate("/")
+            }
+        })
     
         const handleSwipeLeft = () => {
             if (houses.length > 0){

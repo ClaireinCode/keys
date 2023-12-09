@@ -6,7 +6,6 @@ class Users(AbstractUser):
     display_name = models.CharField(max_length=30, unique=True, default="")
     email = models.EmailField(
         verbose_name='email address',
-        max_length=255,
         unique=True,
     )
 

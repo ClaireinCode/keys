@@ -3,10 +3,10 @@ import { api } from "../utilities.jsx";
 import { useState, useEffect } from "react";
 
 const SignupPage = () => {
-    const [email, set_email] = useState("")
-    const [password, set_password] = useState("")
-    const [display_name, set_display_name] = useState("")
-    const {user, setUser} = useOutletContext()
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [displayName, setDisplayName] = useState("")
+    const {user, setUser, setIsLoggedIn} = useOutletContext()
 
     const navigate = useNavigate();
 
@@ -17,14 +17,14 @@ const SignupPage = () => {
             .post("users/signup/", {
                 "email":email,
                 "password":password,
-                "display_name":display_name
+                "display_name":displayName
         })
         if (response.status === 201){
             setUser(response.data.user);
             localStorage.setItem("token", response.data.token)
             api.defaults.headers.common["Authorization"] = `Token ${response.data.token}`
+            setIsLoggedIn(true)
             navigate("/preferences");
-            
         }else {
             alert("Sign up failed!");
             navigate("/")
@@ -47,22 +47,22 @@ const SignupPage = () => {
                     <input
                     type="text"
                     placeholder="display name"
-                    value={display_name}
-                    onChange={(e) => set_display_name(e.target.value)}
+                    value={displayName}
+                    onChange={(e) => setDisplayName(e.target.value)}
                     className="signup_input"
                     />
                     <input
                     type="text"
                     placeholder="email"
                     value={email}
-                    onChange={(e) => set_email(e.target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="signup_input"
                     />
                     <input
                     type="password"
                     placeholder="password"
                     value={password}
-                    onChange={(e) => set_password(e.target.value)}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="signup_input"
                     />
                     <input type="submit" value="Create" id='signup_button'/>             

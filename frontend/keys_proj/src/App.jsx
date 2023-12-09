@@ -9,15 +9,16 @@ function App() {
   const [user, setUser] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   
-  const token = localStorage.getItem("token");
-    if(token) {
-      api.defaults.headers.common["Authorization"] = `Token ${token}`
-      console.log(`axios request authorization header set to: ${api.defaults.headers.common["Authorization"]}`);
-    };
+  // const token = localStorage.getItem("token");
+  //   if(token) {
+  //     api.defaults.headers.common["Authorization"] = `Token ${token}`
+  //     console.log(`axios request authorization header set to: ${api.defaults.headers.common["Authorization"]}`);
+  //   };
 
   const getInfo = async() => {
     let token = localStorage.getItem("token")
     if (token){
+      api.defaults.headers.common["Authorization"] = `Token ${token}`
       let response = await api.get("/users")
       setUser(response.data.user)
       setIsLoggedIn(true)
@@ -41,7 +42,7 @@ function App() {
   return (
     <>
       <NavBar user={user} isLoggedIn={isLoggedIn} logout={logout}/>
-      <Outlet context={{likes, setLikes, dislikes, setDislikes, user, setUser}}/>
+      <Outlet context={{likes, setLikes, dislikes, setDislikes, user, setUser, isLoggedIn, setIsLoggedIn}}/>
     </>
   )
 }
