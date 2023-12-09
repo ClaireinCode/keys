@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.status import (
     HTTP_201_CREATED,
+    HTTP_200_OK,
     HTTP_400_BAD_REQUEST,
     HTTP_404_NOT_FOUND,
     HTTP_204_NO_CONTENT,
@@ -24,7 +25,7 @@ class Sign_up(APIView):
             return Response(
                 {"token": new_token.key, "user": new_user.display_name}, status=HTTP_201_CREATED
             )
-        return Response(HTTP_400_BAD_REQUEST)
+        return Response(HTTP_400_BAD_REQUEST, "user not created")
     
 class Log_in(APIView):
     def post(self, request):
@@ -32,18 +33,10 @@ class Log_in(APIView):
         user = authenticate(username = data.get("email"), password = data.get("password"))
         if user is not None:
             token, created = Token.objects.get_or_create(user = user) #returns tuple (token, True/False)
-            return Response( {"token": token.key, "user": user.display_name}, status=HTTP_201_CREATED)
+            return Response( {"token": token.key, "user": user.display_name}, status=HTTP_200_OK)
         else:
-            return Response(HTTP_404_NOT_FOUND)
-        # email = request.data.get("email")
-        # password = request.data.get("password")
-        # users = authenticate(username=email, password=password)
-        # if users:
-        #     token, created = Token.objects.get_or_create(user=users)
-        #     return Response({"token": token.key, "user": users.email})
-        # else:
-        #     return Response("No user matching credentials", status=HTTP_404_NOT_FOUND)
-
+            return Response(HTTP_404_NOT_FOUND, "No user matching credentials")
+    
 class Info(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]

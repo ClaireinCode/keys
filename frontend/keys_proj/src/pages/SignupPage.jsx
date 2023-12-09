@@ -12,33 +12,23 @@ const SignupPage = () => {
 
     const signup = async (e) => {
         e.preventDefault();
-        const data = { email, password, display_name };
+        // const data = { email, password, display_name };
         const response = await api
             .post("users/signup/", {
                 "email":email,
                 "password":password,
                 "display_name":display_name
-            })
-            if (response.status === 201){
-                setUser(response.data.user);
-                localStorage.setItem("token", response.data.token)
-                api.defaults.headers.common["Authorization"] = `Token ${response.data.token}`
-                navigate("/preferences");
-                
-            }else {
-                alert("Sign up failed!");
-                navigate("/")
-            }
-        
-        // const user_email = response.data.email;
-        // const token = response.data.token;
-        // const username = response.data.username;
-
-        // console.log(`signup success: email: ${user_email}, token: ${token}, display name: ${display_name}`);
-
-        // api.defaults.headers.common["Authorization"] = `Token ${token}`
-        // localStorage.setItem("token", token);
-        // localStorage.setItem("email", user_email);
+        })
+        if (response.status === 201){
+            setUser(response.data.user);
+            localStorage.setItem("token", response.data.token)
+            api.defaults.headers.common["Authorization"] = `Token ${response.data.token}`
+            navigate("/preferences");
+            
+        }else {
+            alert("Sign up failed!");
+            navigate("/")
+        }
     }
 
     useEffect(() => {
