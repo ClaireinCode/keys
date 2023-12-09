@@ -4,16 +4,10 @@ import NavBar from './components/NavBar';
 import { api } from './utilities';
 
 function App() {
-  const [likes, setLikes] = useState([])
-  const [dislikes, setDislikes] = useState([])
+  const [likes, setLikes] = useState({})
+  const [dislikes, setDislikes] = useState({})
   const [user, setUser] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  
-  // const token = localStorage.getItem("token");
-  //   if(token) {
-  //     api.defaults.headers.common["Authorization"] = `Token ${token}`
-  //     console.log(`axios request authorization header set to: ${api.defaults.headers.common["Authorization"]}`);
-  //   };
 
   const getInfo = async() => {
     let token = localStorage.getItem("token")
