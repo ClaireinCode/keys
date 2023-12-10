@@ -11,6 +11,7 @@ const SignupPage = () => {
     const navigate = useNavigate();
 
     const signup = async (e) => {
+        
         e.preventDefault();
         // const data = { email, password, display_name };
         const response = await api
@@ -27,6 +28,7 @@ const SignupPage = () => {
             navigate("/preferences");
         }else {
             alert("Sign up failed!");
+            console.log('Signup failed:', response, response.status);
             navigate("/")
         }
     }

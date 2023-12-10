@@ -8,6 +8,7 @@ function App() {
   const [dislikes, setDislikes] = useState({})
   const [user, setUser] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [house_id, setHouse_id] = useState(null)
 
   const getInfo = async() => {
     let token = localStorage.getItem("token")
@@ -36,7 +37,7 @@ function App() {
   return (
     <>
       <NavBar user={user} isLoggedIn={isLoggedIn} logout={logout}/>
-      <Outlet context={{likes, setLikes, dislikes, setDislikes, user, setUser, isLoggedIn, setIsLoggedIn}}/>
+      <Outlet context={{likes, setLikes, dislikes, setDislikes, user, setUser, isLoggedIn, setIsLoggedIn, setHouse_id, house_id}}/>
     </>
   )
 }
