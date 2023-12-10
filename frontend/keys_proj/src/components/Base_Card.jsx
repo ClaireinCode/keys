@@ -4,7 +4,7 @@ import TinderCard from 'react-tinder-card';
 import Carousel from 'react-bootstrap/Carousel';
 
 
-function Base_Card({mlsId, style, cooling, heating, fireplaces, sqft, baths_full, photos, laundry_features, lot_description, pool, bedrooms, interior_features, exterior_features, parking, water, view, year_built, acres, list_price, cardData, onSwipeLeft, onSwipeRight, likes, dislikes, fullAddress}) {
+function Base_Card({mlsId, style, cooling, heating, fireplaces, sqft, baths_full, photos, laundry_features, lot_description, pool, bedrooms, interior_features, exterior_features, parking, water, view, year_built, acres, list_price, cardData, onSwipeLeft, onSwipeRight, likes, dislikes, fullAddress, handleDoubleClick}) {
     const [fireplace_check, set_fireplace_check] = useState("");
     const [cooling_check, set_cooling_check] = useState("");
     const [heating_check, set_heating_check] = useState("");
@@ -100,7 +100,7 @@ function Base_Card({mlsId, style, cooling, heating, fireplaces, sqft, baths_full
         swipeRequirementType="position"
         swipeThreshold={100}
         >
-            <Card style={{ width: '25rem' }}>
+            <Card style={{ width: '25rem' }} onDoubleClick={handleDoubleClick}>
             <Carousel>
                 {photos.map((photo, index) => (
                 <Carousel.Item key={index}>

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import User_thoughts
+from users.models import Users
 from .serializers import ThoughtSerializer
 from django.http import JsonResponse
 from rest_framework.views import APIView
@@ -16,16 +17,22 @@ from users.views import UserPermissions
 
 # Create your views here.
 class All_thoughts(APIView):
-    def thoughts_by_house(request, house_id):
+    def thoughts_by_house(self, request, house_id):
         house_thoughts = User_thoughts.objects.filter(house_id=house_id)
+        if not house_thoughts:
+            return Response({"message": "No thoughts available for this house"}, status=HTTP_200_OK)
         return Response((ThoughtSerializer(house_thoughts, many=True).data), status=HTTP_200_OK)
 
-    def get(self, request, user_id):
+    def get_user_thoughts(self, request, user_id):
         all_thoughts = request.user.user_thoughts.get(id=user_id)
+        if not all_thoughts:
+            return Response({"message": "No thoughts available for this house"}, status=HTTP_200_OK)
         return Response(ThoughtSerializer(all_thoughts, many=True).data)
     
     def post(self, request):
         data = request.data.copy()
+        user_instance = request.user
+        data['user_id'] = user_instance
         new_thought = User_thoughts.objects.create(**data)
         new_thought.save()
         return Response((ThoughtSerializer(new_thought).data), status=HTTP_201_CREATED)

@@ -248,3 +248,90 @@ input {
     color: #bf7a7a;
     font-size: x-large;
 }
+
+/* Housing Details Page */
+
+#details_page_div {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#details_div {
+    margin-left: 2vw;
+    margin-right: 2vw;
+    margin-top: 60px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #f2d2b6;
+    border-radius: 20px;
+    padding: 50px;
+}
+
+#picture_div {
+
+    width: 100%;
+    background-color: #d9bda4;
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+div.container {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    overflow-x: auto;
+}
+
+#details_pictures_row {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    
+}
+
+#picture_column {
+    padding: 0%;
+    width: 600px;
+    height: 400px;
+}
+
+#details_pictures {
+    width: 100%;
+    height: 100%;
+}
+
+#remarks_div {
+    background-color: #d9bda4;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+#house_details_div {
+    background-color: #d9bda4;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.thoughts_div {
+    background-color: #d9bda4;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 5px;
+}
+
+#thought_textarea {
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    padding: 15px;
+}

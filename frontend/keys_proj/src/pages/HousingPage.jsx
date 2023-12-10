@@ -21,47 +21,51 @@ const HousingPage = () => {
       }
     
         //switch to onClick function for like/dislike buttons
-        useEffect (() => {
-            getHouses()
-        }, [])
+    useEffect (() => {
+        getHouses()
+    }, [])
 
-        const navigate = useNavigate()
+    const navigate = useNavigate()
 
-        useEffect(() => {
-            if (isLoggedIn === false) {
-                navigate("/")
-            }
-        })
+    useEffect(() => {
+        if (isLoggedIn === false) {
+            navigate("/")
+        }
+    })
     
-        const handleSwipeLeft = () => {
-            if (houses.length > 0){
-                setDislikes((dislikes) => [...dislikes, houses[0].mlsId]);
-                setHouses(houses.slice(1));
-            };
+    const handleSwipeLeft = () => {
+        if (houses.length > 0){
+            setDislikes((dislikes) => ({...dislikes, [houses[0].mlsId]:houses[0]}));
+            setHouses(houses.slice(1));
         };
-        useEffect(() => {
-            // Log the updated likes whenever it changes
-            console.log("Updated likes in useEffect:", likes);
-            console.log("and", houses)
-        }, [likes]);
+    };
+    useEffect(() => {
+        // Log the updated likes whenever it changes
+        console.log("Updated likes in useEffect:", likes);
+        console.log("and", houses)
+    }, [likes]);
+
+    const handleSwipeRight = () => {
+        if (houses.length > 0){
+            
+            // Log the current state of likes before the update
+            console.log("current likes before update", likes);
     
-        const handleSwipeRight = () => {
-            if (houses.length > 0){
-                
-                // Log the current state of likes before the update
-                console.log("current likes before update", likes);
-        
-                setLikes((likes) => ({...likes, [houses[0].mlsId]:houses[0]}));
-        
-                // Log the updated likes and houses state
-                console.log("updated likes", likes);
-                
-                setHouses(houses.slice(1));
-        
-                console.log('remaining houses', houses);
-                console.log('likes after update', likes);
-            };
+            setLikes((likes) => ({...likes, [houses[0].mlsId]:houses[0]}));
+    
+            // Log the updated likes and houses state
+            console.log("updated likes", likes);
+            
+            setHouses(houses.slice(1));
+    
+            console.log('remaining houses', houses);
+            console.log('likes after update', likes);
         };
+    };
+
+    const handleDoubleClick = () => {
+        navigate(`/house_details/${houses[0].mlsId}`)
+    }
 
 
         return (
@@ -74,6 +78,7 @@ const HousingPage = () => {
                         cardData={houses[0]}
                         onSwipeLeft={handleSwipeLeft}
                         onSwipeRight={handleSwipeRight}
+                        handleDoubleClick={handleDoubleClick}
                         agent_remarks={houses[0].privateRemarks} 
                         style={houses[0].property.style}
                         cooling={houses[0].property.cooling}

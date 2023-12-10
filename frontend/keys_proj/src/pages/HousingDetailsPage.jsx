@@ -1,56 +1,65 @@
 import { useState, useEffect } from 'react';
 import { api } from '../utilities'
-import { useNavigate, Link, useOutletContext } from 'react-router-dom'
+import { useParams, Link, useOutletContext } from 'react-router-dom'
+import axios from 'axios'
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+import Row from 'react-bootstrap/Row';
+import Container from 'react-bootstrap/Container';
 
 
 const HousingDetailsPage = () => {
-    const [house, setHouse] = useState([])
+    const [house, setHouse] = useState(null)
     const [allThoughts, setAllThoughts] = useState([])
     const [thought, setThought] = useState(null)
-    const {house_id} = useOutletContext()
+    const { house_id } = useParams();
 
     const apiKey = 'simplyrets';
-    const apiSecret = 'simplyrets'
-    const credentials = btoa(`${apiKey}:${apiSecret}`)
+    const apiSecret = 'simplyrets';
+    const credentials = btoa(`${apiKey}:${apiSecret}`);
 
-    useEffect (() => {
-        const getHouse = async () => {
+    const getHouse = async () => {
+        console.log(house_id)
         let response = await axios.get(`https://api.simplyrets.com/properties/${house_id}`, {
             headers: {
                 'Authorization': `Basic ${credentials}`
             }
         })
         setHouse(response.data)
-      }
-      getHouse()
-    })
+    }
 
-    useEffect(() => {
-        const getAllThoughts = async() => {
-            try {
-                let response = await api.get (`house_thoughts/${house_id}/`)
-                setAllThoughts(response.data)  
-            } catch (error) {
-                console.log('Error gathering thoughts: ', error)
-            }
+    const getAllThoughts = async() => {
+        try {
+            let response = await api.get (`user_thoughts/house_thoughts/${house_id}/`)
+            setAllThoughts(response.data)  
+        }catch (error) {
+            console.log('Error gathering thoughts: ', error)
+        } finally {
+            console.log("stop making errors")
         }
+    }
+    getAllThoughts()
+   
+    useEffect(() => {
+        getHouse()
         getAllThoughts()
     }, [])
 
     const postThought = async (userThought) => {
         userThought.preventDefault()
         let data = {
-            "thought":thought,
+            "thoughts":thought,
             "house_id":house_id
         }
         try {
             let response = await api
-                .post("thoughts/", data)
+                .post("user_thoughts/", data)
                 .catch((err) => {
                     alert("Thought failed to post")
                     console.error(err)
                 })
-            if (response.status === 201){
+            if (response && response.status === 201){
+                console.log("successful post!")
                 window.location.reload()
             }
         }catch (error) {
@@ -60,24 +69,41 @@ const HousingDetailsPage = () => {
 
     return (
         <>
-        <div>
-            <div>
-                <div id="picture_div">House Pictures{house.photos}</div>
-                <div id="details_div">Detail Buttons{house.property.map((ahouse, idx)=>(<button key={idx}>{ahouse}</button>))}</div>
-                <div id="remarks_div">Remarks<p>{house.privateRemarks}</p></div>
-                <div id="thoughts">Thoughts</div>
-                {allThoughts.map((thought) => (
-                    <div key={thought.id}>{thought.thoughts}</div>
-                ))}
+        <div id="details_page_div">
+            <div id="details_div">
+                {house ? (
+                    <>
+                    <div id="picture_div">
+                    <Container>
+                        <Row id="details_pictures_row">
+                            {house.photos.length > 0 ? (house.photos.map((photo, index) => (
+                            <Col xs={6} md={6} id="picture_column">
+                            <Image key={index} src={photo} rounded id="details_pictures"/>
+                            </Col>
+                            ))): (<div>No Photos Available.</div>)}
+                        </Row>
+                    </Container>
+                    </div>
+                    
+                    <div id="remarks_div"><p>{house.privateRemarks}</p></div>
+                    <div id="thoughts">Thoughts</div>
+                    {allThoughts.length > 0 ? (allThoughts.map((thought, index) => (
+                        <div key={thought.id} className="thoughts_div">{thought.thoughts}</div>))
+                    ):( <div className="thoughts_div">No thoughts yet! Care to share yours?</div>)}
                 <div id="thought_create_div">
                     <form>
                     <textarea
-                        placeholder="description"
-                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Tell me your thoughts."
+                        onChange={(e) => setThought(e.target.value)}
+                        id="thought_textarea"
                     ></textarea>
                     <input type="submit" value="Post" onClick={postThought}/>
                     </form>
                 </div>
+                </>
+                ) : (
+                    <div> No details available! </div>
+                )}
             </div>
         </div>
         </>

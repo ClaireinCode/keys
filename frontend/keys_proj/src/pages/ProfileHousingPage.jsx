@@ -10,30 +10,51 @@ const ProfileHousingPage = () => {
     const apiKey = 'simplyrets';
     const apiSecret = 'simplyrets'
     const credentials = btoa(`${apiKey}:${apiSecret}`)
-
-    const getHouses = async() => {
-        let response = await axios.get(`https://api.simplyrets.com/properties`, {
-            headers: {
-                'Authorization': `Basic ${credentials}`
-            }
-        })
-        setHouses(response.data)
-      }
+    console.log(likes)
+    // const getHouses = async() => {
+    //     let response = await axios.get(`https://api.simplyrets.com/properties`, {
+    //         headers: {
+    //             'Authorization': `Basic ${credentials}`
+    //         }
+    //     })
+    //     setHouses(response.data)
+    //   }
     
         //switch to onClick function for like/dislike buttons
-        useEffect (() => {
-            getHouses()
-        }, [])
+        // useEffect (() => {
+        //     getHouses()
+        // }, [])
+
+    // const addLike = async () => {
+    //   userThought.preventDefault()
+    //   let data = {
+    //       "thought":thought,
+    //       "house_id":house_id
+    //   }
+    //   try {
+    //       let response = await api
+    //           .post("thoughts/", data)
+    //           .catch((err) => {
+    //               alert("Thought failed to post")
+    //               console.error(err)
+    //           })
+    //       if (response.status === 201){
+    //           window.location.reload()
+    //       }
+    //   }catch (error) {
+    //       console.log('Error posting thoughts: ', error)
+    //   }
+    // }
 
     return (
         <>
         LIKES
         <div className='my-card'>
           {likes.length > 0 ? (
-            likes.map((photo, index) => (
+            likes.map((house, index) => (
               <Liked_Card
                 key={index} // Add a unique key for each item in the list
-                cardData={houses[0]} // Make sure to pass the correct data for each Liked_Card
+                cardData={house} // Make sure to pass the correct data for each Liked_Card
                 setDislikes={setDislikes}
                 dislikes={dislikes}
                 setLikes={setLikes}
