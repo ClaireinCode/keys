@@ -16,14 +16,8 @@ from users.views import UserPermissions
 
 
 # Create your views here.
-class All_thoughts(APIView):
-    def thoughts_by_house(self, request, house_id):
-        house_thoughts = User_thoughts.objects.filter(house_id=house_id)
-        if not house_thoughts:
-            return Response({"message": "No thoughts available for this house"}, status=HTTP_200_OK)
-        return Response((ThoughtSerializer(house_thoughts, many=True).data), status=HTTP_200_OK)
-
-    def get_user_thoughts(self, request, user_id):
+class All_thoughts(UserPermissions):
+    def get(self, request, user_id):
         all_thoughts = request.user.user_thoughts.get(id=user_id)
         if not all_thoughts:
             return Response({"message": "No thoughts available for this house"}, status=HTTP_200_OK)
@@ -70,3 +64,10 @@ class A_thought(UserPermissions):
             list.delete()
             return Response(status=HTTP_204_NO_CONTENT)
         return Response("OBJECT DOES NOT EXIST", status=HTTP_404_NOT_FOUND)
+    
+class Thoughts_by_house(UserPermissions):
+    def get(self, request, house_id):
+        house_thoughts = User_thoughts.objects.filter(house_id=house_id)
+        if not house_thoughts:
+            return Response({"message": "No thoughts available for this house"}, status=HTTP_200_OK)
+        return Response((ThoughtSerializer(house_thoughts, many=True).data), status=HTTP_200_OK)

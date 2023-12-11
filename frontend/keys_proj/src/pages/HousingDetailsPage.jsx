@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../utilities'
-import { useParams, Link, useOutletContext } from 'react-router-dom'
+import { useParams, Link, useOutletContext, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
@@ -8,11 +8,15 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
 
+
 const HousingDetailsPage = () => {
     const [house, setHouse] = useState(null)
     const [allThoughts, setAllThoughts] = useState([])
     const [thought, setThought] = useState(null)
     const { house_id } = useParams();
+    const { isLoggedIn } = useOutletContext()
+
+    const navigate = useNavigate()
 
     const apiKey = 'simplyrets';
     const apiSecret = 'simplyrets';
@@ -26,21 +30,26 @@ const HousingDetailsPage = () => {
             }
         })
         setHouse(response.data)
+        
     }
 
     const getAllThoughts = async() => {
         try {
             let response = await api.get (`user_thoughts/house_thoughts/${house_id}/`)
-            setAllThoughts(response.data)  
+            setAllThoughts(response.data)
+            console.log("Thoughts gathered")  
         }catch (error) {
             console.log('Error gathering thoughts: ', error)
         } finally {
             console.log("stop making errors")
         }
     }
-    getAllThoughts()
+    
    
     useEffect(() => {
+        if (isLoggedIn === false) {
+            navigate("/")
+        }
         getHouse()
         getAllThoughts()
     }, [])
@@ -66,6 +75,7 @@ const HousingDetailsPage = () => {
             console.log('Error posting thoughts: ', error)
         }
     }
+
 
     return (
         <>

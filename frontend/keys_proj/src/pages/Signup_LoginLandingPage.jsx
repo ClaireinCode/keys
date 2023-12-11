@@ -1,9 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
+import { useEffect } from 'react';
+
 
 //Attribution: Key by Nikita Kozin from <a href="https://thenounproject.com/browse/icons/term/key/" target="_blank" title="Key Icons">Noun Project</a> (CC BY 3.0)
 
 const Signup_LoginLandingPage = () => {
+    const { isLoggedIn } = useOutletContext()
+    const navigate = useNavigate()
+
     const backgroundImage = {
         backgroundImage: 'url("src/assets/chicago3.jpeg")',
         backgroundSize: 'cover', // Adjust the background size as needed
@@ -14,6 +19,12 @@ const Signup_LoginLandingPage = () => {
         display: 'flex',
         flexDirection: 'column',
     };
+
+    useEffect(() => {
+        if (isLoggedIn === true) {
+            navigate("/houses")
+        }
+    })
 
     return (
         <div style={backgroundImage} id='basediv_landing'>
