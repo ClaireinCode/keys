@@ -4,8 +4,8 @@ import NavBar from './components/NavBar';
 import { api } from './utilities';
 
 function App() {
-  const [likes, setLikes] = useState({})
-  const [dislikes, setDislikes] = useState({})
+  const [likes, setLikes] = useState([])
+  const [dislikes, setDislikes] = useState([])
   const [user, setUser] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [house_id, setHouse_id] = useState(null)

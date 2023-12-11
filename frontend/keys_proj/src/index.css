@@ -1,8 +1,9 @@
 #root {
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     font-family: 'Cambria, Cochin, Georgia, Times, Times New Roman', serif;
     background-color: #F2A594;
+    min-height: 100vh;
 }
 
 #basediv_landing {
@@ -315,7 +316,7 @@ div.container {
     margin-bottom: 10px;
 }
 
-#house_details_div {
+#minor_deets_div {
     background-color: #d9bda4;
     border-radius: 20px;
     padding: 15px;

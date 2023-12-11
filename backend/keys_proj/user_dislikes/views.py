@@ -14,7 +14,7 @@ from rest_framework.status import (
 
 
 # Create your views here.
-class All_dislikes(UserPermissions):
+class All_dislikes(APIView):
     def get(self, request):
         dislikes = DislikeSerializer(request.user.user_dislikes.all().order_by('id'), many=True)
         return Response(dislikes.data)
@@ -22,7 +22,7 @@ class All_dislikes(UserPermissions):
     def post(self, request):
         try:
             data = request.data.copy()
-            data["user"] = request.user
+            data["user_id"] = request.user
             print(data)
             new_dislike = User_dislikes.objects.create(**data)
             new_dislike.save()
@@ -32,7 +32,7 @@ class All_dislikes(UserPermissions):
             print(e)
             return Response(status=HTTP_400_BAD_REQUEST)
         
-class A_dislike(UserPermissions):
+class A_dislike(APIView):
     def get_a_house(self, user, dislike_id):
         try:
             dislike = user.user_dislikes.get(id = dislike_id)

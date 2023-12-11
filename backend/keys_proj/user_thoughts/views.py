@@ -16,7 +16,7 @@ from users.views import UserPermissions
 
 
 # Create your views here.
-class All_thoughts(UserPermissions):
+class All_thoughts(APIView):
     def get(self, request, user_id):
         all_thoughts = request.user.user_thoughts.get(id=user_id)
         if not all_thoughts:
@@ -33,7 +33,7 @@ class All_thoughts(UserPermissions):
     
 
 
-class A_thought(UserPermissions):
+class A_thought(APIView):
     def get_a_thought(self, user,thought_id):
         try:
             thought = user.user_thoughts.get(id = thought_id)
@@ -65,9 +65,17 @@ class A_thought(UserPermissions):
             return Response(status=HTTP_204_NO_CONTENT)
         return Response("OBJECT DOES NOT EXIST", status=HTTP_404_NOT_FOUND)
     
-class Thoughts_by_house(UserPermissions):
+class Thoughts_by_house(APIView):
     def get(self, request, house_id):
         house_thoughts = User_thoughts.objects.filter(house_id=house_id)
         if not house_thoughts:
             return Response({"message": "No thoughts available for this house"}, status=HTTP_200_OK)
-        return Response((ThoughtSerializer(house_thoughts, many=True).data), status=HTTP_200_OK)
+        
+        serialized_data = []
+
+        for each_thought in house_thoughts:
+            thought_data = ThoughtSerializer(each_thought).data
+            thought_data['username'] = each_thought.user_id.display_name
+            serialized_data.append(thought_data)
+
+        return Response(serialized_data, status=HTTP_200_OK)

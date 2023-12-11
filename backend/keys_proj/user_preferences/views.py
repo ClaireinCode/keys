@@ -14,7 +14,7 @@ from rest_framework.status import (
 
 
 # Create your views here.
-class All_preferences(UserPermissions):
+class All_preferences(APIView):
     def get(self, request):
         preferences = PreferencesSerializer(request.user.user_preferences.all().order_by('id'), many=True)
         return Response(preferences.data)
@@ -32,7 +32,7 @@ class All_preferences(UserPermissions):
             print(e)
             return Response(status=HTTP_400_BAD_REQUEST)
         
-class A_preference(UserPermissions):
+class A_preference(APIView):
     def get_a_house(self, user, preferences_id):
         try:
             preferences = user.user_preferences.get(id = preferences_id)

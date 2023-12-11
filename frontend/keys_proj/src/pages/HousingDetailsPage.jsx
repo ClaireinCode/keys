@@ -94,11 +94,49 @@ const HousingDetailsPage = () => {
                         </Row>
                     </Container>
                     </div>
-                    
+                    <div id="major_deets_div"><h3>{house.listPrice} - {house.address.full} - {house.property.yearBuilt}</h3></div>
                     <div id="remarks_div"><p>{house.privateRemarks}</p></div>
-                    <div id="thoughts">Thoughts</div>
+                    <div id="minor_deets_div">
+                        <button className='buttons'>
+                            {house.property.bathsFull} Bathrooms
+                        </button>
+                        <button className='buttons'>
+                            {house.property.bedrooms} Bedrooms
+                        </button>
+                        <button className='buttons'>
+                            {house.property.style}
+                        </button >
+                        <button className='buttons'>
+                            {house.property.cooling}
+                        </button>
+                        <button className='buttons'>
+                            {house.property.heating}
+                        </button>
+                        <button className='buttons'>
+                            {house.property.area}sqft
+                        </button>
+                        <button className='buttons'>
+                            {house.property.view} View
+                        </button >
+                        <button className='buttons'>
+                            Fireplace
+                        </button>
+                        {/* <button className='buttons' style={{visibility:'hidden'}}>
+                            {interior_features}
+                        </button className='buttons'> */}
+                        {/* <button className='buttons' style={{visibility:'hidden'}}>
+                            {exterior_features}
+                        </button className='buttons'> */}
+                        <button className='buttons' >
+                            Laundry
+                        </button>
+                        <button className='buttons'>
+                            Pool
+                        </button>
+                    </div>
+                    <div id="thoughts"><h4>Thoughts</h4></div>
                     {allThoughts.length > 0 ? (allThoughts.map((thought, index) => (
-                        <div key={thought.id} className="thoughts_div">{thought.thoughts}</div>))
+                        <div key={thought.id} className="thoughts_div"><h5>{thought.username}</h5>{thought.thoughts}</div>))
                     ):( <div className="thoughts_div">No thoughts yet! Care to share yours?</div>)}
                 <div id="thought_create_div">
                     <form>

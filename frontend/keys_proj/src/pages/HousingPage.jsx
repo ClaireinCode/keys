@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Base_Card from '../components/Base_Card.jsx';
 import { useOutletContext, useNavigate } from 'react-router';
+import { api } from '../utilities.jsx';
 
 const HousingPage = () => {
     const [houses, setHouses] = useState([]);
@@ -17,12 +18,19 @@ const HousingPage = () => {
                 'Authorization': `Basic ${credentials}`
             }
         })
-        setHouses(response.data)
+        let likedHouseIds = likes.map(like => like.user_houses);
+        let dislikedHouseIds = dislikes.map(dislike => dislike.user_houses);
+
+        let filteredHouses = response.data.filter(house => !likedHouseIds.includes(house.mlsId) && !dislikedHouseIds.includes(house.mlsId))
+        setHouses(filteredHouses)
       }
+
+    
     
         //switch to onClick function for like/dislike buttons
     useEffect (() => {
         getHouses()
+        getLikesAndDislikes()
     }, [])
 
     const navigate = useNavigate()
@@ -33,12 +41,45 @@ const HousingPage = () => {
         }
     })
     
+    const getLikesAndDislikes = async() => {
+        try {
+            let likeResponse = await api.get(`user_likes/`)
+            setLikes(likeResponse.data)
+            console.log("Likes gathered")
+            let dislikeResponse = await api.get(`user_dislikes/`)
+            setDislikes(dislikeResponse.data)
+            console.log("Dislikes gathered")
+        } catch (error) {
+            console.log("Error gathering likes: ", error)
+        }
+    }
+
     const handleSwipeLeft = () => {
         if (houses.length > 0){
-            setDislikes((dislikes) => ({...dislikes, [houses[0].mlsId]:houses[0]}));
+            postDislikes();
             setHouses(houses.slice(1));
         };
     };
+
+    const postDislikes = async() => {
+        let data = {
+            "user_houses":houses[0].mlsId
+        }
+        try {
+            let response = await api
+                .post("user_dislikes/", data)
+                .catch((err) => {
+                    alert("Dislike failed to post")
+                    console.error(err)
+                })
+            if (response && response.status === 201){
+                console.log("successful dislike!")
+            }
+        }catch(error) {
+            console.log("Error posting dislikes: ", error)
+        }
+    }
+
     useEffect(() => {
         // Log the updated likes whenever it changes
         console.log("Updated likes in useEffect:", likes);
@@ -51,7 +92,7 @@ const HousingPage = () => {
             // Log the current state of likes before the update
             console.log("current likes before update", likes);
     
-            setLikes((likes) => ({...likes, [houses[0].mlsId]:houses[0]}));
+            postLikes()
     
             // Log the updated likes and houses state
             console.log("updated likes", likes);
@@ -62,6 +103,25 @@ const HousingPage = () => {
             console.log('likes after update', likes);
         };
     };
+
+    const postLikes = async() => {
+        let data = {
+            "user_houses":houses[0].mlsId
+        }
+        try {
+            let response = await api
+                .post("user_likes/", data)
+                .catch((err) => {
+                    alert("Like failed to post")
+                    console.error(err)
+                })
+            if (response && response.status === 201){
+                console.log("successful like!")
+            }
+        }catch(error) {
+            console.log("Error posting likes: ", error)
+        }
+    }
 
     const handleDoubleClick = () => {
         navigate(`/house_details/${houses[0].mlsId}`)
@@ -107,7 +167,7 @@ const HousingPage = () => {
                         mls_id={houses[0].mlsId}
                         terms={houses[0].terms}
                         special_conditions={houses[0].specialListingConditions}
-                        list_price={houses[0].property.listPrice} 
+                        list_price={houses[0].listPrice} 
                         fullAddress={houses[0].address.full}
                         zipcode={houses[0].address.postalCode}
                         street_name={houses[0].address.streetName}
