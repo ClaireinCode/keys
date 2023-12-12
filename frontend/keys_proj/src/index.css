@@ -368,3 +368,33 @@ div.container {
     display: flex;
     text-align: center;
 }
+
+#preferences_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#pref_inner_div {
+    margin-top: 200px;
+    width: 90vw;
+    border-radius: 20px;
+    overflow: hidden;
+    
+}
+
+#pref_form {
+    background-color: #f2d2b6;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+    height: 500px;
+}
+
+.mb-3 {
+    width: 200px;
+    margin: 10px;
+}

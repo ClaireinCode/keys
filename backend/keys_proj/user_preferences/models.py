@@ -266,7 +266,7 @@ class Home_type(models.TextChoices):
 
 class User_preferences(models.Model):
     user_id = models.ForeignKey(Users, related_name='user_preferences', on_delete=models.CASCADE)
-    home_type = models.CharField()
+    home_type = models.CharField(blank=True, null=True)
     bedrooms = models.CharField(blank=True, null=True, max_length=1, choices=Bedrooms.choices)
     bathrooms = models.CharField(blank=True, null=True, max_length=1, choices=Bathrooms.choices)
     neighborhood = models.CharField(blank=True, null=True, choices=Neighborhood.choices)
