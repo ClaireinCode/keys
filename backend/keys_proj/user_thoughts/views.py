@@ -16,7 +16,7 @@ from users.views import UserPermissions
 
 
 # Create your views here.
-class All_thoughts(APIView):
+class All_thoughts(UserPermissions):
     def get(self, request, user_id):
         all_thoughts = request.user.user_thoughts.get(id=user_id)
         if not all_thoughts:
@@ -33,7 +33,7 @@ class All_thoughts(APIView):
     
 
 
-class A_thought(APIView):
+class A_thought(UserPermissions):
     def get_a_thought(self, user,thought_id):
         try:
             thought = user.user_thoughts.get(id = thought_id)
@@ -65,7 +65,7 @@ class A_thought(APIView):
             return Response(status=HTTP_204_NO_CONTENT)
         return Response("OBJECT DOES NOT EXIST", status=HTTP_404_NOT_FOUND)
     
-class Thoughts_by_house(APIView):
+class Thoughts_by_house(UserPermissions):
     def get(self, request, house_id):
         house_thoughts = User_thoughts.objects.filter(house_id=house_id)
         if not house_thoughts:

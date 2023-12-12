@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Liked_Card from '../components/Liked_Cards';
 import axios from 'axios';
 import { useOutletContext } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../utilities';
 
 const ProfileHousingPage = () => {
   const [houses, setHouses] = useState([]);
   const {likes, setLikes, setDislikes, dislikes} = useOutletContext()
+
+  const navigate = useNavigate()
 
   const apiKey = 'simplyrets';
   const apiSecret = 'simplyrets'
@@ -45,9 +48,9 @@ const ProfileHousingPage = () => {
   
       // Use Promise.all to wait for all requests to complete
       const likedHouses = await Promise.all(housePromises);
-  
+      setHouses(likedHouses)
       // Now houseDetails contains details for each liked house
-      console.log("check, check");
+      console.log("check, check", likedHouses);
     } catch (error) {
       console.error('Error fetching liked houses details:', error);
     }
@@ -58,16 +61,17 @@ const ProfileHousingPage = () => {
     getLikedHouses()
   },[])
       
-  const handleDoubleClick = () => {
-    navigate(`/house_details/${houses[0].mlsId}`)
+  const handleDoubleClick = (houseId) => {
+    console.log("mic check")
+    // navigate(`/house_details/${houseId}`)
   }
-
+  console.log("sldjfd", houses)
   return (
       <>
       Liked Houses
       <div className='my-card'>
-        {likes.length > 0 ? (
-          likes.map((house, index) => (
+        {houses.length > 0 ? (
+          houses.map((house, index) => (
             <Liked_Card
               key={index}
               cardData={house} 

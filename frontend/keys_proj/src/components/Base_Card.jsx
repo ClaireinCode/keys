@@ -100,7 +100,7 @@ function Base_Card({mlsId, style, cooling, heating, fireplaces, sqft, baths_full
         swipeRequirementType="position"
         swipeThreshold={100}
         >
-            <Card style={{ width: '25rem' }} onDoubleClick={handleDoubleClick}>
+            <Card style={{ width: '25rem' }} onDoubleClick={handleDoubleClick} className='base_card'>
             <Carousel>
                 {photos.map((photo, index) => (
                 <Carousel.Item key={index}>
@@ -109,7 +109,7 @@ function Base_Card({mlsId, style, cooling, heating, fireplaces, sqft, baths_full
                 ))}
             </Carousel>
             <Card.Body>
-                <Card.Title>{fullAddress} | {year_built}</Card.Title>
+                <Card.Title>${list_price} - {year_built}</Card.Title>
                 <div>
                 <div id='button_div' >
                     <button className='buttons'>

@@ -14,7 +14,7 @@ from rest_framework.status import (
 
 
 # Create your views here.
-class All_likes(APIView):
+class All_likes(UserPermissions):
     def get(self, request):
         likes = LikeSerializer(request.user.user_likes.all().order_by('id'), many=True)
         return Response(likes.data)
@@ -32,7 +32,7 @@ class All_likes(APIView):
             print(e)
             return Response(status=HTTP_400_BAD_REQUEST)
         
-class A_like(APIView):
+class A_like(UserPermissions):
     def get_a_house(self, user, like_id):
         try:
             like = user.user_likes.get(id = like_id)
