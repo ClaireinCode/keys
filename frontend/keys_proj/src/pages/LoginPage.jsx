@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const {user, setUser} = useOutletContext()
+    const {user, setUser, isLoggedIn, setIsLoggedIn} = useOutletContext()
 
     const navigate = useNavigate();
 
@@ -19,6 +19,7 @@ const LoginPage = () => {
             setUser(response.data.user);
             localStorage.setItem("token", response.data.token);
             api.defaults.headers.common["Authorization"] = `Token ${response.data.token}`;
+            setIsLoggedIn(true)
             navigate("/houses");
         }
         else {

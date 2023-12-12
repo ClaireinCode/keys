@@ -11,17 +11,18 @@ function Liked_Card({cardData, handleDoubleClick}) {
   return (
     <Card style={{ width: '18rem' }} className="liked_cards_base" onDoubleClick={handleDoubleClick(cardData.mlsId)}>
       <Carousel>
-        <Carousel.Item>
-          {cardData ? 
-            (<img className="d-block w-100" src={cardData.photos} alt={`Slide`} draggable={false}/>) : ("No photo available")}
-        </Carousel.Item>
+                {cardData.photos.map((photo, index) => (
+                <Carousel.Item key={index}>
+                    <img className="d-block w-100" src={photo} alt={`Slide ${index}`} draggable={false}/>
+                </Carousel.Item>
+                ))}
       </Carousel>
       <Card.Body>
         <Card.Title>${cardData.listPrice}</Card.Title>
         <Card.Text>
-          {cardData.privateRemarks}
+          {cardData.status}
         </Card.Text>
-        {/* <Link to="/house_contact"><button>Contact</button></Link> */}
+        <Link to="/house_contact"><button>Contact</button></Link>
       </Card.Body>
       <Card.Footer>
           <Button variant="danger">

@@ -21,6 +21,7 @@ const ProfileHousingPage = () => {
         let likeResponse = await api.get(`user_likes/`)
         setLikes(likeResponse.data)
         console.log("Likes gathered")
+        getLikedHouses()
     } catch (error) {
         console.log("Error gathering likes: ", error)
     }
@@ -58,7 +59,6 @@ const ProfileHousingPage = () => {
 
   useEffect(() => {
     getLikes()
-    getLikedHouses()
   },[])
       
   const handleDoubleClick = (houseId) => {
@@ -67,9 +67,8 @@ const ProfileHousingPage = () => {
   }
   console.log("sldjfd", houses)
   return (
-      <>
-      Liked Houses
-      <div className='my-card'>
+      <div id="liked_card_page">
+      <div id='liked_card'>
         {houses.length > 0 ? (
           houses.map((house, index) => (
             <Liked_Card
@@ -86,7 +85,7 @@ const ProfileHousingPage = () => {
           <div> No more cards! </div>
         )}
       </div>
-    </>
+      </div>
   );
 };
 export default ProfileHousingPage

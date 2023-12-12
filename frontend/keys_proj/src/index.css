@@ -338,7 +338,24 @@ div.container {
     padding: 15px;
 }
 
+#liked_card_page {
+    display: flex;
+    margin: 0px;
+    height: 100%;
+}
+
+#liked_card {
+    display: flex;
+    margin-top: 50px;
+    
+}
+
 .liked_cards_base{
     background-color: #f2d2b6;
     margin: 1vw;  
+    min-width: 400px;
+    max-width: 400px;
+    height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
 }
