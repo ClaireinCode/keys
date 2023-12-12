@@ -12,22 +12,22 @@ function Liked_Card({cardData, handleDoubleClick}) {
     <Card style={{ width: '18rem' }} className="liked_cards_base" onDoubleClick={handleDoubleClick(cardData.mlsId)}>
       <Carousel>
                 {cardData.photos.map((photo, index) => (
-                <Carousel.Item key={index}>
+                <Carousel.Item key={index} className='liked_card_pic'>
                     <img className="d-block w-100" src={photo} alt={`Slide ${index}`} draggable={false}/>
                 </Carousel.Item>
                 ))}
       </Carousel>
       <Card.Body>
-        <Card.Title>${cardData.listPrice}</Card.Title>
+        <Card.Title className="liked_card_title">${cardData.listPrice}<br></br>{cardData.address.full}</Card.Title>
         <Card.Text>
-          {cardData.status}
+          Status: {cardData.mls.status}<br></br>Days on the Market: {cardData.mls.daysOnMarket}
         </Card.Text>
-        <Link to="/house_contact"><button>Contact</button></Link>
       </Card.Body>
       <Card.Footer>
-          <Button variant="danger">
+          <Button variant="danger" onClick={handleDoubleClick(cardData.mlsId)}>
             Details
           </Button>
+          <Link to="/house_contact"><Button>Contact</Button></Link>
         </Card.Footer>
     </Card>
   );

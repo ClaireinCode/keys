@@ -359,3 +359,12 @@ div.container {
     border-radius: 20px;
     overflow: hidden;
 }
+
+.liked_card_pic {
+    height: 250px
+}
+
+.liked_card_title {
+    display: flex;
+    text-align: center;
+}
