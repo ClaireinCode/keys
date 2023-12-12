@@ -17,10 +17,10 @@ from users.views import UserPermissions
 
 # Create your views here.
 class All_thoughts(UserPermissions):
-    def get(self, request, user_id):
-        all_thoughts = request.user.user_thoughts.get(id=user_id)
+    def get(self, request):
+        all_thoughts = request.user.user_thoughts.all().order_by('date')
         if not all_thoughts:
-            return Response({"message": "No thoughts available for this house"}, status=HTTP_200_OK)
+            return Response({"message": "No thoughts available from this user"}, status=HTTP_200_OK)
         return Response(ThoughtSerializer(all_thoughts, many=True).data)
     
     def post(self, request):
