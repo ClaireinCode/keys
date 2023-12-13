@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 function PreferencesComponent() {
-    const [preferences, setPreferences] = useState()
     const [home_type, setHome_type] = useState()
     const [bedrooms, setBedrooms] = useState()
     const [bathrooms, setBathrooms] = useState()

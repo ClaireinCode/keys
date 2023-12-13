@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import PreferenceMatch from '../components/PreferenceMatch';
 
 
 
@@ -96,6 +97,10 @@ const HousingDetailsPage = () => {
                     </div>
                     <div id="major_deets_div"><h3>{house.listPrice} - {house.address.full} - {house.property.yearBuilt}</h3></div>
                     <div id="remarks_div"><p>{house.privateRemarks}</p></div>
+                    <PreferenceMatch
+                        house={house}>
+                            
+                        </PreferenceMatch>
                     <div id="minor_deets_div">
                         <button className='buttons'>
                             {house.property.bathsFull} Bathrooms
