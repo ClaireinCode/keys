@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import PreferenceMatch from '../components/PreferenceMatch';
+import DetailButtons from '../components/DetailButtons';
 
 
 
@@ -14,6 +15,7 @@ const HousingDetailsPage = () => {
     const [house, setHouse] = useState(null)
     const [allThoughts, setAllThoughts] = useState([])
     const [thought, setThought] = useState(null)
+    const [trigger, setTrigger] = useState(true)
     const { house_id } = useParams();
     const { isLoggedIn } = useOutletContext()
 
@@ -45,6 +47,10 @@ const HousingDetailsPage = () => {
             console.log("stop making errors")
         }
     }
+
+    const triggerThought = () => {
+        setTrigger(!trigger)
+    }
     
    
     useEffect(() => {
@@ -54,6 +60,10 @@ const HousingDetailsPage = () => {
         getHouse()
         getAllThoughts()
     }, [])
+
+    useEffect(() => {
+        getAllThoughts()
+    }, [trigger])
 
     const postThought = async (userThought) => {
         userThought.preventDefault()
@@ -70,7 +80,8 @@ const HousingDetailsPage = () => {
                 })
             if (response && response.status === 201){
                 console.log("successful post!")
-                window.location.reload()
+                triggerThought()
+                setThought("")
             }
         }catch (error) {
             console.log('Error posting thoughts: ', error)
@@ -95,49 +106,13 @@ const HousingDetailsPage = () => {
                         </Row>
                     </Container>
                     </div>
-                    <div id="major_deets_div"><h3>{house.listPrice} - {house.address.full} - {house.property.yearBuilt}</h3></div>
+                    <div id="major_deets_div"><h3>${house.listPrice} - {house.address.full} - {house.property.yearBuilt}</h3></div>
                     <div id="remarks_div"><p>{house.privateRemarks}</p></div>
-                    <PreferenceMatch
-                        house={house}>
-                            
-                        </PreferenceMatch>
                     <div id="minor_deets_div">
-                        <button className='buttons'>
-                            {house.property.bathsFull} Bathrooms
-                        </button>
-                        <button className='buttons'>
-                            {house.property.bedrooms} Bedrooms
-                        </button>
-                        <button className='buttons'>
-                            {house.property.style}
-                        </button >
-                        <button className='buttons'>
-                            {house.property.cooling}
-                        </button>
-                        <button className='buttons'>
-                            {house.property.heating}
-                        </button>
-                        <button className='buttons'>
-                            {house.property.area}sqft
-                        </button>
-                        <button className='buttons'>
-                            {house.property.view} View
-                        </button >
-                        <button className='buttons'>
-                            Fireplace
-                        </button>
-                        {/* <button className='buttons' style={{visibility:'hidden'}}>
-                            {interior_features}
-                        </button className='buttons'> */}
-                        {/* <button className='buttons' style={{visibility:'hidden'}}>
-                            {exterior_features}
-                        </button className='buttons'> */}
-                        <button className='buttons' >
-                            Laundry
-                        </button>
-                        <button className='buttons'>
-                            Pool
-                        </button>
+                    <PreferenceMatch
+                        house={house}>    
+                    </PreferenceMatch>
+                    {/* <DetailButtons/>   */}
                     </div>
                     <div id="thoughts"><h4>Thoughts</h4></div>
                     {allThoughts.length > 0 ? (allThoughts.map((thought, index) => (
@@ -147,6 +122,7 @@ const HousingDetailsPage = () => {
                     <form>
                     <textarea
                         placeholder="Tell me your thoughts."
+                        value={thought}
                         onChange={(e) => setThought(e.target.value)}
                         id="thought_textarea"
                     ></textarea>

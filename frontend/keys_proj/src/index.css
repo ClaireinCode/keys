@@ -83,6 +83,20 @@
     margin-top: 15vh;
 }
 
+.carousel_base_card{
+    height: 400px;
+    overflow: hidden;
+}
+
+#base_card_details_div {
+    display: flex;
+    flex-direction: row;
+    background-color: #d9bda4;
+    border-radius: 20px; 
+    height: 300px;
+    padding: 4px;
+}
+
 div.card-body {
     display: flex;
     flex-direction: column;
@@ -114,7 +128,7 @@ div.card-title {
     border: 2px #011164;
     padding: 7px;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.251);
+    background-color: rgba(whitesmoke);
     color: #011164;
     border-style: solid;
 }
@@ -251,7 +265,8 @@ input {
     font-size: x-large;
 }
 
-/* Housing Details Page */
+/* Housing Details Page  ///////////////////////////////////////////////////////////////////////////// */
+
 
 #details_page_div {
     height: 100%;
@@ -273,6 +288,7 @@ input {
     padding: 50px;
 }
 
+
 #picture_div {
 
     width: 100%;
@@ -285,18 +301,10 @@ input {
     overflow: hidden;
 }
 
-div.container {
-    width: 100%;
-    height: 100%;
-    padding: 0px;
-    overflow-x: auto;
-}
-
 #details_pictures_row {
     display: inline-flex;
     width: 100%;
     height: 100%;
-    
 }
 
 #picture_column {

@@ -6,6 +6,7 @@ import { api } from '../utilities.jsx';
 
 const HousingPage = () => {
     const [houses, setHouses] = useState([]);
+    const [preferences, setPreferences] = useState()
     const {likes, setLikes, setDislikes, dislikes, isLoggedIn} = useOutletContext();
    
     const apiKey = 'simplyrets';
@@ -40,6 +41,11 @@ const HousingPage = () => {
             navigate("/")
         }
     })
+
+    useEffect(() => {
+        getLikesAndDislikes()
+        getPreferences()
+    }, [houses])
     
     const getLikesAndDislikes = async() => {
         try {
@@ -51,6 +57,27 @@ const HousingPage = () => {
             console.log("Dislikes gathered")
         } catch (error) {
             console.log("Error gathering likes: ", error)
+        }
+    }
+
+    const getPreferences = async() => {
+        try {
+            let preferenceResponse = await api.get(`user_preferences/`)
+            setPreferences(preferenceResponse.data)
+            console.log("Preferences gathered", preferences)
+            // bedroomsMatch()
+            // bathroomsMatch()
+            // neighborhoodMatch()
+            // dishwasherMatch()
+            // parkingMatch()
+            // fireplace_exists()
+            // pool_exists()
+            // laundry_exists()
+            // cooling_exists()
+            // heating_exists()
+            // extraFeaturesParsing()
+        } catch (error) {
+            console.log("Error gathering preferences: ", error)
         }
     }
 
@@ -135,6 +162,29 @@ const HousingPage = () => {
                 {houses.length > 0 ? (
                         <Base_Card
                         key={houses[0].mlsId}
+                        house={houses[0]}
+                        onSwipeLeft={handleSwipeLeft}
+                        onSwipeRight={handleSwipeRight}
+                        handleDoubleClick={handleDoubleClick}
+                        setDislikes={setDislikes}
+                        dislikes={dislikes}
+                        setLikes={setLikes}
+                        likes={likes}
+                        preferences={preferences}
+                        id='base_card'/>
+                ) : (
+                    <div> No more cards! </div>
+                )}
+            </div>
+            </div>
+            </>
+        )
+    }
+export default HousingPage
+
+
+{/* <Base_Card
+                        key={houses[0].mlsId}
                         cardData={houses[0]}
                         onSwipeLeft={handleSwipeLeft}
                         onSwipeRight={handleSwipeRight}
@@ -187,13 +237,5 @@ const HousingPage = () => {
                         dislikes={dislikes}
                         setLikes={setLikes}
                         likes={likes}
-                        id='base_card'/>
-                ) : (
-                    <div> No more cards! </div>
-                )}
-            </div>
-            </div>
-            </>
-        )
-    }
-export default HousingPage
+                        preferences={preferences}
+                        id='base_card'/> */}
