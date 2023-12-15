@@ -4,7 +4,10 @@
     font-family: 'Cambria, Cochin, Georgia, Times, Times New Roman', serif;
     background-color: #F2A594;
     min-height: 100vh;
+    color: #775d44;
 }
+
+/* Landing Page /////////////////////////////////////////////////////////////////////////////////*/
 
 #basediv_landing {
     display: flex;
@@ -62,6 +65,8 @@
     color: gray;
     background-color: rgba(255, 255, 255, 0.662);
 }
+
+/* Housing Page ////////////////////////////////////////////////////////////////////////////////*/
 
 #housing_page {
     
@@ -121,7 +126,7 @@ div.card-title {
     min-width: 550px;
     border-radius: 10px;
     padding: 5px;
-    height: 300px;
+    height: 100%;
 }
 
 .buttons {
@@ -133,6 +138,8 @@ div.card-title {
     color: #775d44;
     border-style: solid;
 }
+
+/* Sign Up Page /////////////////////////////////////////////////////////////////////////////////*/
 
 #signup_div, #login_div, #account_div {
     height: 100%;
@@ -209,6 +216,8 @@ input {
     left: 440px;
     top: 387px;
 }
+
+/* Profile Page //////////////////////////////////////////////////////////////////////////////////*/
 
 #profile_div {
     height: 100%;
@@ -287,25 +296,33 @@ input {
     background-color: #f2d2b6;
     border-radius: 20px;
     padding: 50px;
+    border: 4px solid white;
+    justify-content: center;
+    align-items: center;
 }
-
 
 #picture_div {
 
     width: 100%;
+    height: 400px;
     background-color: #d9bda4;
     display: flex;
     flex-direction: row;
     padding: 0px;
     margin-bottom: 20px;
     border-radius: 20px;
-    overflow: hidden;
+    overflow-x: auto;
+    justify-content: left;
 }
 
 #details_pictures_row {
-    display: inline-flex;
+    display: flex;
     width: 100%;
     height: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow-wrap: normal;
 }
 
 #picture_column {
@@ -324,6 +341,7 @@ input {
     border-radius: 20px;
     padding: 15px;
     margin-bottom: 10px;
+    
 }
 
 #minor_deets_div {
@@ -333,19 +351,39 @@ input {
     margin-bottom: 10px;
 }
 
+#schools_div {
+    background-color: #d9bda4;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
+    
+}
+
+#contact_div {
+    background-color: #d9bda4;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
+    height: fit-content;
+}
+
 .thoughts_div {
     background-color: #d9bda4;
     border-radius: 20px;
     padding: 15px;
     margin-bottom: 5px;
+    width: 100%;
 }
 
 #thought_textarea {
-    width: 100%;
+    width: 90vw;
     border: none;
     border-radius: 20px;
     padding: 15px;
+    
 }
+
+/* Like/Dislike Page ////////////////////////////////////////////////////////////////////////*/
 
 #liked_card_page {
     display: flex;
@@ -377,6 +415,8 @@ input {
     display: flex;
     text-align: center;
 }
+
+/* Preferences Page /////////////////////////////////////////////////////////////////////// */
 
 #preferences_div {
     display: flex;

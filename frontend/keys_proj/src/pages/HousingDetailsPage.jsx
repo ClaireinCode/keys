@@ -118,11 +118,12 @@ const HousingDetailsPage = () => {
                     <div id="major_deets_div"><h3>${house.listPrice} - {house.address.full} - {house.property.yearBuilt}</h3></div>
                     <div id="remarks_div"><p>{house.privateRemarks}</p></div>
                     <div id="minor_deets_div">
-                    
                     <Buttons
                     house={house}
                     preferences={preferences}/>
                     </div>
+                    <div id="schools_div"></div>
+                    <div id="contact_div"></div>
                     <div id="thoughts"><h4>Thoughts</h4></div>
                     {allThoughts.length > 0 ? (allThoughts.map((thought, index) => (
                         <div key={thought.id} className="thoughts_div"><h5>{thought.username}</h5>{thought.thoughts}</div>))
