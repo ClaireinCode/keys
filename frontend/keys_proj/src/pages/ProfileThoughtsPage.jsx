@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../utilities'
 import { useParams, Link, useOutletContext, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-
 
 const ProfileThoughtsPage = () => {
     const [house, setHouse] = useState(null)

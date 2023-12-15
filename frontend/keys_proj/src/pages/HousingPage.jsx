@@ -65,17 +65,6 @@ const HousingPage = () => {
             let preferenceResponse = await api.get(`user_preferences/`)
             setPreferences(preferenceResponse.data)
             console.log("Preferences gathered", preferences)
-            // bedroomsMatch()
-            // bathroomsMatch()
-            // neighborhoodMatch()
-            // dishwasherMatch()
-            // parkingMatch()
-            // fireplace_exists()
-            // pool_exists()
-            // laundry_exists()
-            // cooling_exists()
-            // heating_exists()
-            // extraFeaturesParsing()
         } catch (error) {
             console.log("Error gathering preferences: ", error)
         }

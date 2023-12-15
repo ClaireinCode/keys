@@ -29,7 +29,7 @@ const LoginPage = () => {
     }
 
     useEffect(() => {
-        if (user) {
+        if (isLoggedIn) {
             navigate("/houses")
         }
     })

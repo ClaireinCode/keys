@@ -6,15 +6,13 @@ import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
-import PreferenceMatch from '../components/PreferenceMatch';
-import DetailButtons from '../components/DetailButtons';
-
-
+import Buttons from '../components/Buttons';
 
 const HousingDetailsPage = () => {
     const [house, setHouse] = useState(null)
     const [allThoughts, setAllThoughts] = useState([])
-    const [thought, setThought] = useState(null)
+    const [thought, setThought] = useState("")
+    const [preferences, setPreferences] = useState([])
     const [trigger, setTrigger] = useState(true)
     const { house_id } = useParams();
     const { isLoggedIn } = useOutletContext()
@@ -34,6 +32,16 @@ const HousingDetailsPage = () => {
         })
         setHouse(response.data)
         
+    }
+
+    const getPreferences = async() => {
+        try {
+            let preferenceResponse = await api.get(`user_preferences/`)
+            setPreferences(preferenceResponse.data)
+            console.log("Preferences gathered", preferences)
+        } catch (error) {
+            console.log("Error gathering preferences: ", error)
+        }
     }
 
     const getAllThoughts = async() => {
@@ -58,7 +66,9 @@ const HousingDetailsPage = () => {
             navigate("/")
         }
         getHouse()
+        getPreferences()
         getAllThoughts()
+        
     }, [])
 
     useEffect(() => {
@@ -88,7 +98,6 @@ const HousingDetailsPage = () => {
         }
     }
 
-
     return (
         <>
         <div id="details_page_div">
@@ -109,16 +118,16 @@ const HousingDetailsPage = () => {
                     <div id="major_deets_div"><h3>${house.listPrice} - {house.address.full} - {house.property.yearBuilt}</h3></div>
                     <div id="remarks_div"><p>{house.privateRemarks}</p></div>
                     <div id="minor_deets_div">
-                    <PreferenceMatch
-                        house={house}>    
-                    </PreferenceMatch>
-                    {/* <DetailButtons/>   */}
+                    
+                    <Buttons
+                    house={house}
+                    preferences={preferences}/>
                     </div>
                     <div id="thoughts"><h4>Thoughts</h4></div>
                     {allThoughts.length > 0 ? (allThoughts.map((thought, index) => (
                         <div key={thought.id} className="thoughts_div"><h5>{thought.username}</h5>{thought.thoughts}</div>))
                     ):( <div className="thoughts_div">No thoughts yet! Care to share yours?</div>)}
-                <div id="thought_create_div">
+                    <div id="thought_create_div">
                     <form>
                     <textarea
                         placeholder="Tell me your thoughts."

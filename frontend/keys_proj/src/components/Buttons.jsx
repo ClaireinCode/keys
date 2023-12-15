@@ -1,11 +1,8 @@
-import Card from 'react-bootstrap/Card';
 import { useState, useEffect } from 'react';
-import TinderCard from 'react-tinder-card';
-import Carousel from 'react-bootstrap/Carousel';
 
+function Buttons({house, preferences}) {
+    // const [preferences, setPreferences] = useState([])
 
-
-function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDoubleClick, preferences}) {
     const [fireplaceCheck, setFireplaceCheck] = useState("none");
     const [coolingCheck, setCoolingCheck] = useState("none");
     const [heatingCheck, setHeatingCheck] = useState("none");
@@ -25,7 +22,24 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
 
     const [interiorFeatures, setInteriorFeatures] = useState([])
     const [exteriorFeatures, setExteriorFeatures] = useState([])
-    const [hide, setHide] = useState('')
+    const [hide, setHide] = useState("")
+
+     //////////////////////////////////////////////GET PREFERENCES///////////////////////////////////////////////////////
+
+    // const getPreferences = async() => {
+    //     try {
+    //         let preferenceResponse = await api.get(`user_preferences/`)
+    //         setPreferences(preferenceResponse.data)
+    //         console.log("Preferences gathered", preferences)
+    //     } catch (error) {
+    //         console.log("Error gathering preferences: ", error)
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     getPreferences()
+    // }, [])
+
 
     //////////////////////////////////////////////MATCHING MECHANICS///////////////////////////////////////////////////////
     
@@ -42,7 +56,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
     }
 
     const bathroomsMatch = () => {
-        if (preferences[0].bathrooms) {
+        if (preferences) {
             if (preferences[0].bathrooms === house.property.bathsFull){
                 setBathroomsColor("#7b904b")
             }
@@ -61,7 +75,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
     // }
 
     const parkingMatch = () => {
-        if (preferences[0].parking) {
+        if (preferences) {
             if (preferences[0].parking === house.property.parking.description){
                 setParkingColor("#7b904b")
             }
@@ -75,7 +89,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
     }
 
     const dishwasherMatch = () => {
-        if (preferences[0].dishwasher) {
+        if (preferences) {
             if (preferences[0].dishwasher === house.property.dishwasher){
                 setDishwasherColor("#7b904b")
             }
@@ -108,7 +122,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
     };
 
     const laundryExists = () => {
-        if (preferences[0].laundry) {
+        if (preferences) {
             if (house.property.laundry === 'None' || house.property.laundry === null || house.property.laundry === 'none'){
                 setLaundryCheck("none")
             }
@@ -168,16 +182,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
       }
     
     //////////////////////////////////////////////SWIPING MECHANIC///////////////////////////////////////////////////////
-    
-    const onSwipe = (direction) => {
-        console.log("you swiped:", direction)
-        direction === 'left' ? onSwipeLeft() : onSwipeRight();
-        console.log("check", direction)
-    };
 
-    const onCardLeftScreen = (myIdentifier) => {
-        console.log(myIdentifier, 'left the screen')
-    };
 
     useEffect(() => {
         bedroomsMatch()
@@ -192,87 +197,64 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
         coolingExists()
         extraFeaturesParsing()
         console.log('Card re-rendered'); // Log when the component re-renders
-    }, [likes, dislikes]);
+    }, []);
 
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     return (
-        <TinderCard
-        onSwipe={onSwipe} 
-        onCardLeftScreen={() => onCardLeftScreen('fooBar')} 
-        preventSwipe={['up', 'down']}
-        swipeRequirementType="position"
-        swipeThreshold={100}
-        >
-            <Card style={{ width: '25rem' }} onDoubleClick={handleDoubleClick} className='base_card'>
-            <Carousel className='carousel_base_card'>
-                {house.photos.map((photo, index) => (
-                <Carousel.Item key={index}>
-                    <img className="d-block w-100" src={photo} alt={`Slide ${index}`} draggable={false}/>
-                </Carousel.Item>
-                ))}
-            </Carousel>
-            <Card.Body>
-            <Card.Title>${house.listPrice} - {house.postalCode} - {house.property.yearBuilt}</Card.Title>
-                <div id="base_card_details_div">
-                {house ? (
-                <>
-                    <div id='button_div' >
-                    <button className='buttons' style={{backgroundColor:bedroomsColor}}>
-                        {house.property.bedrooms} Bedrooms
-                    </button>
-                    <button className='buttons' style={{backgroundColor:bathroomsColor}}>
-                        {house.property.bathsFull} Bathrooms
-                    </button>
-                    <button className='buttons'>
-                        {house.property.style}
-                    </button >
-                    <button className='buttons' style={{display:coolingCheck, backgroundColor:coolingColor}}>
-                        {house.property.cooling}
-                    </button>
-                    <button className='buttons' style={{display:heatingCheck, backgroundColor:heatingColor}}>
-                        {house.property.heating}
-                    </button>
-                    <button className='buttons'>
-                        {house.property.area}sqft
-                    </button>
-                    <button className='buttons'>
-                        {house.property.view} View
-                    </button >
-                    <button className='buttons' style={{display:fireplaceCheck, backgroundColor:fireplaceColor}}>
-                    Fireplace
-                    </button>
-                    {interiorFeatures.map((feature, index) => (
-                        <button key={index} className='buttons' style={{backgroundColor:'#f5daaa', display:hide}}>{feature}</button>
-                    ))}
-                    <button className="buttons" style={{backgroundColor:dishwasherColor}}>Dishwasher</button>
-                    {exteriorFeatures.map((feature, index) => (
-                        <button key={index} className='buttons' style={{backgroundColor:'#f5daaa', display:hide}}>{feature}</button>
-                    ))}
-                    <button className='buttons' style={{backgroundColor:parkingColor}}>
-                        {house.property.parking.description} 
-                    </button >
-                    <button className='buttons' style={{display:laundryCheck, backgroundColor:laundryColor}}>
-                        Laundry
-                    </button>
-                    <button className='buttons' style={{display:poolCheck, backgroundColor:poolColor}}>
-                        Pool
-                    </button>
-                    </div>
-                    </>
-                    ) : (
-                <div> No details available! </div>
-                )}
-                </div>
-                <Card.Text>
-                    {/* thoughts go here */}
-                </Card.Text>
-            </Card.Body>
-            </Card>
-        </TinderCard>
+        <div id="base_card_details_div">
+        {house ? (
+        <>
+            <div id='button_div' >
+            <button className='buttons' style={{backgroundColor:bedroomsColor}}>
+                {house.property.bedrooms} Bedrooms
+            </button>
+            <button className='buttons' style={{backgroundColor:bathroomsColor}}>
+                {house.property.bathsFull} Bathrooms
+            </button>
+            <button className='buttons'>
+                {house.property.style}
+            </button >
+            <button className='buttons' style={{display:coolingCheck, backgroundColor:coolingColor}}>
+                {house.property.cooling}
+            </button>
+            <button className='buttons' style={{display:heatingCheck, backgroundColor:heatingColor}}>
+                {house.property.heating}
+            </button>
+            <button className='buttons'>
+                {house.property.area}sqft
+            </button>
+            <button className='buttons'>
+                {house.property.view} View
+            </button >
+            <button className='buttons' style={{display:fireplaceCheck, backgroundColor:fireplaceColor}}>
+            Fireplace
+            </button>
+            {interiorFeatures.map((feature, index) => (
+                <button key={index} className='buttons' style={{backgroundColor:'#f5daaa', display:hide}}>{feature}</button>
+            ))}
+            <button className="buttons" style={{backgroundColor:dishwasherColor}}>Dishwasher</button>
+            {exteriorFeatures.map((feature, index) => (
+                <button key={index} className='buttons' style={{backgroundColor:'#f5daaa', display:hide}}>{feature}</button>
+            ))}
+            <button className='buttons' style={{backgroundColor:parkingColor}}>
+                {house.property.parking.description} 
+            </button >
+            <button className='buttons' style={{display:laundryCheck, backgroundColor:laundryColor}}>
+                Laundry
+            </button>
+            <button className='buttons' style={{display:poolCheck, backgroundColor:poolColor}}>
+                Pool
+            </button>
+            </div>
+            </>
+            ) : (
+        <div> No details available! </div>
+        )}
+        </div>   
   );
 }
 
-export default Base_Card;
+export default Buttons;
