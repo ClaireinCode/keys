@@ -1,7 +1,13 @@
+@font-face {
+    font-family: 'JosefinSlab';
+    src: url('./fonts/static/JosefinSlab-SemiBold.ttf') format('woff2'),
+         url('./fonts/static/JosefinSlab-Regular.ttf') format('woff');
+}
+
 #root {
     height: 100%;
     width: 100vw;
-    font-family: 'Cambria, Cochin, Georgia, Times, Times New Roman', serif;
+    font-family: 'JosefinSlab';
     background-color: #F2A594;
     min-height: 100vh;
     color: #775d44;
@@ -100,6 +106,7 @@
     border-radius: 20px; 
     height: 300px;
     padding: 4px;
+    overflow-y: auto;
 }
 
 div.card-body {
@@ -155,38 +162,32 @@ div.card-title {
     justify-content: center;
     align-items: center;
     background-color: #f2d2b6;
-    height: 600px;
+    height: 400px;
     width: 500px;
     padding: 70px;
     border-radius: 40px;
     overflow: hidden;
+    margin-top: 30vh;
 }
 
 #signup_form, #login_form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 input {
     margin: 10px;
     border: none;
     padding: 7px;
+    width: 300px;
     border-radius: 5px;
     background-color: whitesmoke;
 }
 
 #signup_title, #login_title, #profile_div, #account_title{
     color: #bf7a7a;
-}
-
-#signup_title_div {
-    background-color: white;
-    opacity: 30%;
-    width: 500px;
-    height: 50px;
-    position: fixed;
-    left: 440px;
-    top: 364px;
 }
 
 .signup_input, .login_input {
@@ -205,16 +206,6 @@ input {
 #signup_button:hover, #login_button:hover {
     color: whitesmoke;
     background-color: #F2A594;  
-}
-
-#login_title_div {
-    background-color: white;
-    opacity: 30%;
-    width: 500px;
-    height: 50px;
-    position: fixed;
-    left: 440px;
-    top: 387px;
 }
 
 /* Profile Page //////////////////////////////////////////////////////////////////////////////////*/
@@ -389,22 +380,23 @@ input {
     display: flex;
     margin: 0px;
     height: 100%;
+    justify-content: center;
 }
 
 #liked_card {
     display: flex;
-    margin-top: 50px;
-    
+    margin-top: 100px;  
 }
 
 .liked_cards_base{
-    background-color: #f2d2b6;
+    background-color: #c9d4a9;
     margin: 1vw;  
     min-width: 400px;
     max-width: 400px;
     height: 500px;
     border-radius: 20px;
     overflow: hidden;
+    border: 3px solid white
 }
 
 .liked_card_pic {
@@ -414,6 +406,19 @@ input {
 .liked_card_title {
     display: flex;
     text-align: center;
+}
+.liked_card_text {
+    display: flex;
+    background-color: #d8dbcc;
+    border-radius: 10px;
+    height: 100px;
+    padding: 5px;
+    color: #775d44;
+}
+.liked_butttons {
+    background-color: #bf7a7a;
+    margin: 10px;
+    color: #d8dbcc;
 }
 
 /* Preferences Page /////////////////////////////////////////////////////////////////////// */
@@ -446,4 +451,74 @@ input {
 .mb-3 {
     width: 200px;
     margin: 10px;
+}
+
+/* Thoughts Page /////////////////////////////////////////////////////////////////////// */
+
+#thoughts_page {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+#personal_thoughts {
+    margin-top: 7vh;
+}
+
+/* Account Details Page /////////////////////////////////////////////////////////////////////// */
+
+.account_buttons{
+    font-size: 20px;
+    min-width: 300px;
+    background-color: #bf7a7a;
+    color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+}
+
+.account_buttons:hover {
+    background-color: #F2A594;
+}
+
+#account_page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid red;
+}
+
+#account_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 7vh;
+    border: 3px solid black;
+}
+
+#account_deets_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2d2b6;
+    height: 500px;
+    width: 500px;
+    padding: 70px;
+    border-radius: 40px;
+    overflow: hidden;
+    margin-top: 20vh;
+}
+
+#account_input {
+    margin: 10px;
+    border: none;
+    padding: 7px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: whitesmoke;
 }

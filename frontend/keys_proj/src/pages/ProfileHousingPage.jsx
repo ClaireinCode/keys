@@ -82,7 +82,7 @@ const ProfileHousingPage = () => {
             />
           ))
         ) : (
-          <div> No more cards! </div>
+          <div> No cards! </div>
         )}
       </div>
       </div>

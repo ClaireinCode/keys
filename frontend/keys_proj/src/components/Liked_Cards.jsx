@@ -19,15 +19,15 @@ function Liked_Card({cardData, handleDoubleClick}) {
       </Carousel>
       <Card.Body>
         <Card.Title className="liked_card_title">${cardData.listPrice}<br></br>{cardData.address.full}</Card.Title>
-        <Card.Text>
+        <Card.Text className='liked_card_text'>
           Status: {cardData.mls.status}<br></br>Days on the Market: {cardData.mls.daysOnMarket}
         </Card.Text>
       </Card.Body>
       <Card.Footer>
-          <Button variant="danger" onClick={handleDoubleClick(cardData.mlsId)}>
+          <Button variant="danger" onClick={handleDoubleClick(cardData.mlsId)} className='liked_buttons'>
             Details
           </Button>
-          <Link to="/house_contact"><Button>Contact</Button></Link>
+          <Link to={`/house_contact/${cardData.mlsId}`}><Button>Contact</Button></Link>
         </Card.Footer>
     </Card>
   );

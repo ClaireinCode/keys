@@ -21,6 +21,9 @@ const ProfileThoughtsPage = () => {
         }
     }
     
+    const handleDoubleClick = async() => {
+        navigate(`/house_details/${thought.house_id}`)
+    }
    
     useEffect(() => {
         if (isLoggedIn === false) {
@@ -31,11 +34,13 @@ const ProfileThoughtsPage = () => {
 
     return (
         <>
-        <div id="personal_thoughts"><h4>Thoughts</h4></div>
+        <div id="thoughts_page">
+        <div id="personal_thoughts"><h4>Your Thoughts</h4></div>
             {allThoughts.length > 0 ? (allThoughts.map((thought, index) => (
                 <div key={thought.id} className="thoughts_div"><h5>{thought.house_id}</h5>{thought.thoughts}</div>))
             ):( <div className="thoughts_div">No thoughts yet!</div>)}
         <div id="thought_create_div"></div>
+        </div>
         </>
     )
 }

@@ -62,7 +62,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
 
     const parkingMatch = () => {
         if (preferences[0].parking) {
-            if (preferences[0].parking === house.property.parking.description){
+            if (house.property.parking.description){
                 setParkingColor("#7b904b")
             }
             else if (house.property.parking === 'None' || house.property.parking === null || house.property.parking === 'none') {
@@ -76,10 +76,10 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
 
     const dishwasherMatch = () => {
         if (preferences[0].dishwasher) {
-            if (preferences[0].dishwasher === house.property.dishwasher){
+            if (house.property.dishwasher === 'None' || house.property.dishwasher === null || house.property.dishwasher === 'none'){
                 setDishwasherColor("#7b904b")
             }
-            else if (house.property.dishwasher === 'None' || house.property.dishwasher === null || house.property.dishwasher === 'none') {
+            else if (house.property.dishwasher && preferences[0].dishwasher === house.property.dishwasher.toLowerCase()){
                 setDishwasherColor("#d4593d")
             }
         }
@@ -113,7 +113,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
                 setLaundryCheck("none")
             }
         else {
-            if (preferences[0].laundry === house.property.laundry){
+            if (house.property.laundry && preferences[0].laundry === house.property.laundry.toLowerCase()){
                 setLaundryColor("#7b904b")
             }
             else {
@@ -128,9 +128,12 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
             setHeatingCheck("none")
             setHeatingColor("#d4593d")
         }
+        else if (preferences[0].heating === 'radiant' && house.property.heating === 'Radiant Heat') {
+            setHeatingColor("#7b904b")
+        }
         else {
             setHeatingCheck("inline")
-            if (preferences[0].heating === house.property.heating){
+            if (preferences[0].heating === house.property.heating.toLowerCase()){
                 setHeatingColor("#7b904b")
             }
             else {
@@ -145,7 +148,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
         }
         else {
             setCoolingCheck("inline")
-            if (preferences[0].cooling === house.property.cooling){
+            if (preferences[0].cooling === house.property.cooling.toLowerCase()){
                 setCoolingColor("#7b904b")
             }
             else {
@@ -215,7 +218,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
                 ))}
             </Carousel>
             <Card.Body>
-            <Card.Title>${house.listPrice} - {house.postalCode} - {house.property.yearBuilt}</Card.Title>
+            <Card.Title>${house.listPrice} - {house.address.full} - {house.property.yearBuilt}</Card.Title>
                 <div id="base_card_details_div">
                 {house ? (
                 <>

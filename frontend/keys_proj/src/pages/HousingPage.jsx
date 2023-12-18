@@ -7,6 +7,8 @@ import { api } from '../utilities.jsx';
 const HousingPage = () => {
     const [houses, setHouses] = useState([]);
     const [preferences, setPreferences] = useState()
+    const [qualityofLife, setQualityofLife] = useState()
+    const [currentCity, setCurrentCity] = useState()
     const {likes, setLikes, setDislikes, dislikes, isLoggedIn} = useOutletContext();
    
     const apiKey = 'simplyrets';
@@ -24,7 +26,22 @@ const HousingPage = () => {
 
         let filteredHouses = response.data.filter(house => !likedHouseIds.includes(house.mlsId) && !dislikedHouseIds.includes(house.mlsId))
         setHouses(filteredHouses)
+        console.log("getting quality of life scores")
+        getQualityofLifeScores()
       }
+
+    const getQualityofLifeScores = async() => {
+        let city = houses[0].address.city.replace(/_/g, "-")
+        setCurrentCity(city)
+        console.log(city)
+        let response = await axios
+                                .get(`https://api.census.gov/data/2019/acs/acs5?get=NAME,B19013_001E&for=county:*&key=YOUR_API_KEY
+                                `)
+                                .catch((err) => {
+                                    console.error("City not found",err)})
+        setQualityofLife(response.data)
+        console.log(response.data)
+    }
 
     
     
@@ -45,6 +62,7 @@ const HousingPage = () => {
     useEffect(() => {
         getLikesAndDislikes()
         getPreferences()
+        getQualityofLifeScores()
     }, [houses])
     
     const getLikesAndDislikes = async() => {

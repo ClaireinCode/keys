@@ -260,26 +260,26 @@ class Parking(models.TextChoices):
     no_parking = 'no_parking', 'No Parking'
 
 class Home_type(models.TextChoices):
-    house = 'residential', 'residential'
+    house = 'residential', 'single family'
     condo = 'condominium', 'condominium'
     multi = 'multifamily', 'multifamily'
 
 class User_preferences(models.Model):
     user_id = models.ForeignKey(Users, related_name='user_preferences', on_delete=models.CASCADE)
-    home_type = models.CharField(blank=True, null=True)
-    bedrooms = models.CharField(blank=True, null=True, max_length=1, choices=Bedrooms.choices)
-    bathrooms = models.CharField(blank=True, null=True, max_length=1, choices=Bathrooms.choices)
-    neighborhood = models.CharField(blank=True, null=True, choices=Neighborhood.choices)
-    laundry = models.CharField(blank=True, null=True, choices=Laundry.choices)
-    cooling = models.CharField(blank=True, null=True, choices=Cooling.choices)
-    heating = models.CharField(blank=True, null=True, choices=Heating.choices)
-    living_area = models.PositiveIntegerField(blank=True, null=True)
-    lot_area = models.PositiveIntegerField(blank=True, null=True)
-    age = models.PositiveIntegerField(blank=True, null=True)
-    price_min = models.PositiveIntegerField(blank=True, null=True)
-    price_max = models.PositiveIntegerField(blank=True, null=True)
-    hoa_max = models.PositiveIntegerField(blank=True, null=True)
-    hoa_min = models.PositiveIntegerField(blank=True, null=True)
-    dishwasher = models.BooleanField(blank=True, null=True)
-    floors = models.CharField(blank=True, null=True, choices=Floors.choices)
-    parking = models.CharField(blank=True, null=True, choices=Parking.choices)
+    home_type = models.CharField(blank=True, null=False, default="")
+    bedrooms = models.CharField(blank=True, null=False, max_length=1, choices=Bedrooms.choices, default=0)
+    bathrooms = models.CharField(blank=True, null=False, max_length=1, choices=Bathrooms.choices, default=1)
+    neighborhood = models.CharField(blank=True, null=False, choices=Neighborhood.choices, default="")
+    laundry = models.CharField(blank=True, null=False, choices=Laundry.choices, default="")
+    cooling = models.CharField(blank=True, null=False, choices=Cooling.choices, default="")
+    heating = models.CharField(blank=True, null=False, choices=Heating.choices, default="")
+    living_area = models.PositiveIntegerField(blank=True, null=False, default=0)
+    lot_area = models.PositiveIntegerField(blank=True, null=False, default=0)
+    age = models.PositiveIntegerField(blank=True, null=False, default=0)
+    price_min = models.PositiveIntegerField(blank=True, null=False, default=0)
+    price_max = models.PositiveIntegerField(blank=True, null=False, default=20000000)
+    hoa_max = models.PositiveIntegerField(blank=True, null=False, default=30000)
+    hoa_min = models.PositiveIntegerField(blank=True, null=False, default=0)
+    dishwasher = models.BooleanField(blank=True, null=False, default=True)
+    floors = models.CharField(blank=True, null=False, choices=Floors.choices, default="")
+    parking = models.CharField(blank=True, null=False, choices=Parking.choices, default="")
