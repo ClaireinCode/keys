@@ -9,8 +9,6 @@ import { api } from '../utilities.jsx';
 const HousingPage = () => {
     const [houses, setHouses] = useState([]);
     const [preferences, setPreferences] = useState()
-    const [position, setPosition] = useState(null)
-    const [currentZipcode, setCurrentZipcode] = useState()
     const {likes, setLikes, setDislikes, dislikes, isLoggedIn} = useOutletContext();
 
 
@@ -18,10 +16,6 @@ const HousingPage = () => {
     const apiKey = 'simplyrets';
     const apiSecret = 'simplyrets'
     const credentials = btoa(`${apiKey}:${apiSecret}`)
-
-    //tomtom
-    const ttApiKey = import.meta.env.VITE_TOMTOM_API_KEY
-    const ttBaseUrl = import.meta.env.VITE_TOMTOM_BASE_URL
     
     const getHouses = async() => {
         let response = await axios.get(`https://api.simplyrets.com/properties`, {
@@ -34,29 +28,12 @@ const HousingPage = () => {
 
         let filteredHouses = response.data.filter(house => !likedHouseIds.includes(house.mlsId) && !dislikedHouseIds.includes(house.mlsId))
         setHouses(filteredHouses)
-        getPointsofInterest()
+        
       }
 
 
     //https://{baseURL}/search/{versionNumber}/nearbySearch/.{ext}?key={Your_API_Key}&lat={lat}&lon={lon}&radius={radius}&limit={limit}&ofs={ofs}&countrySet={countrySet}&topleft={topleft}&btmRight={btmRight}&language={language}&extendedPostalCodesFor={extendedPostalCodesFor}&categoryset={categoryset}&brandSet={brandSet}&connectorset={connectorset}&fuelSet={fuelSet}&vehicleTypeSet={vehicleTypeSet}&view={view}&openingHours={openingHours}&timezone={timezone}
-    const getPointsofInterest = async() => {
-        let currentZipcode = houses[0].address.postalCode
-        console.log(currentZipcode)
-        let response = await axios
-                                .get(`https://api.tomtom.com/search/2/geocode/${currentZipcode}%20United%20States.json?key=${ttApiKey}`)
-                                .catch((err) => {
-                                    console.error("City not found",err)})
-        setPosition(response.data.results[0].position)
-        console.log("are we null here or...?",position)
-        let response2 = await axios
-                                    .get(`https://api.tomtom.com/search/2/nearbySearch/.json?key=${ttApiKey}&lat=${position.lat}&lon=${position.lon}&radius=1610&limit=10`)
-                                    .catch((err) => {
-                                        console.error("No interesting places!")
-                                    })
-        //setPointsofInterest(response.data)
-        console.log(response2.data)
-    }
-
+    
     
     
         //switch to onClick function for like/dislike buttons
@@ -77,7 +54,6 @@ const HousingPage = () => {
     useEffect(() => {
         getLikesAndDislikes()
         getPreferences()
-
     }, [houses])
     
     const getLikesAndDislikes = async() => {

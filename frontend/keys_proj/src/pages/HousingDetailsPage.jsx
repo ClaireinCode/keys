@@ -13,6 +13,9 @@ const HousingDetailsPage = () => {
     const [allThoughts, setAllThoughts] = useState([])
     const [thought, setThought] = useState("")
     const [preferences, setPreferences] = useState([])
+    const [position, setPosition] = useState(null)
+    const [currentZipcode, setCurrentZipcode] = useState()
+    const [pointsofInterest, setPointsofInterest] = useState([])
     const [trigger, setTrigger] = useState(true)
     const { house_id } = useParams();
     const { isLoggedIn } = useOutletContext()
@@ -23,6 +26,11 @@ const HousingDetailsPage = () => {
     const apiSecret = 'simplyrets';
     const credentials = btoa(`${apiKey}:${apiSecret}`);
 
+    //tomtom
+    const ttApiKey = import.meta.env.VITE_TOMTOM_API_KEY
+  
+    //console.log("no key",ttApiKey)
+
     const getHouse = async () => {
         console.log(house_id)
         let response = await axios.get(`https://api.simplyrets.com/properties/${house_id}`, {
@@ -31,7 +39,30 @@ const HousingDetailsPage = () => {
             }
         })
         setHouse(response.data)
-        
+        //getCoordinates()  
+    }
+
+    const getCoordinates = async () => {
+        console.log(house.address.postalCode)
+        setCurrentZipcode(house.address.postalCode)
+        console.log("zipcode",currentZipcode)
+        let response = await axios
+                                .get(`https://api.tomtom.com/search/2/geocode/${currentZipcode}%20United%20States.json?key=${ttApiKey}`)
+                                .catch((err) => {
+                                    console.error("Zipcode not found",err)})
+        setPosition(response.data.results[0].position)
+        console.log("are we null here or...?",position)
+        //getPointsofInterest()
+    }
+
+    const getPointsofInterest = async () => {
+        let poi = await axios
+                            .get(`https://api.tomtom.com/search/2/nearbySearch/.json?key=${ttApiKey}&lat=${position.lat}&lon=${position.lon}&radius=1610&limit=10&categoryset=7315`)
+                            .catch((err) => {
+                                    console.error("No interesting places!")
+                                    })
+        setPointsofInterest(poi.data.results)
+        console.log(poi.data)
     }
 
     const getPreferences = async() => {
@@ -68,7 +99,7 @@ const HousingDetailsPage = () => {
         getHouse()
         getPreferences()
         getAllThoughts()
-        
+        //getPointsofInterest()
     }, [])
 
     useEffect(() => {
@@ -98,6 +129,8 @@ const HousingDetailsPage = () => {
         }
     }
 
+    console.log("POI",pointsofInterest)
+
     return (
         <>
         <div id="details_page_div">
@@ -111,20 +144,31 @@ const HousingDetailsPage = () => {
                             <Col xs={6} md={6} id="picture_column">
                             <Image key={index} src={photo} rounded id="details_pictures"/>
                             </Col>
-                            ))): (<div>No Photos Available.</div>)}
+                            ))): (<div>No photos available.</div>)}
                         </Row>
                     </Container>
                     </div>
                     <div id="major_deets_div"><h3>${house.listPrice} - {house.address.full} - {house.property.yearBuilt}</h3></div>
-                    <div id="remarks_div"><p>{house.privateRemarks}</p></div>
+                    <div id="remarks_div"><p>{house.privateRemarks.toLowerCase()}</p></div>
                     <div id="minor_deets_div">
                     <Buttons
                     house={house}
                     preferences={preferences}/>
                     </div>
-                    <div id="schools_div"></div>
-                    <div id="contact_div"></div>
-                    <div id="thoughts"><h4>Thoughts</h4></div>
+                    <div id="interests_div">
+                    {pointsofInterest.length > 0 ? (pointsofInterest.map((interest, index) => (
+                        <button className="interests_buttons" key={index}>{interest.poi.categories[0]}: {interest.poi.name}</button>))):( <h5>No interesting places nearby...</h5>)}</div>
+                    <div id="school_div">
+                        <p>Elementary School: {house.school.elementarySchool}</p>
+                        <p>Middle School: {house.school.middleSchool}</p>
+                        <p>High School: {house.school.highSchool}</p>
+                    </div>
+                    <div id="contact_div">
+                        <h5>{house.agent.contact.firstName} {house.agent.contact.lastName}</h5>
+                        <p>Cell: {house.agent.contact.cell}</p>
+                        <p>Email: {house.agent.contact.email}</p>
+                    </div>
+                    <div id="thoughts"><h4>thoughts</h4></div>
                     {allThoughts.length > 0 ? (allThoughts.map((thought, index) => (
                         <div key={thought.id} className="thoughts_div"><h5>{thought.username}</h5>{thought.thoughts}</div>))
                     ):( <div className="thoughts_div">No thoughts yet! Care to share yours?</div>)}
@@ -141,7 +185,7 @@ const HousingDetailsPage = () => {
                 </div>
                 </>
                 ) : (
-                    <div> No details available! </div>
+                    <div><h5>No details available!</h5></div>
                 )}
             </div>
         </div>

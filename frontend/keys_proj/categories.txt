@@ -1,0 +1,65 @@
+{"id": 7373,
+"name": "Shopping Center"}
+
+{"id": 9154,
+"name": "Prison/Correctional Facility"}
+
+{"id": 9359,
+"name": "Restaurant Area"}
+
+{"id": 7338,
+"name": "Swimming Pool"}
+
+{"id": 7332005,
+"name": "Supermarkets & Hypermarkets"}
+
+{"id": 9902002,
+"name": "Amusement Arcade"}
+
+{"id": 9942,
+"name": "Public Tranportation Stop"}
+
+{"id": 7302,
+"name": "Trails"}
+
+{"id": 7376,
+"name": "Tourist Attraction"}
+
+{"id": 9362,
+"name": "Park & Recreation"}
+
+{"id": 7318,
+"name": "Theatre"}
+
+{"id": 7342,
+"name": "Movie Theatre"}
+
+{"id": 9379
+"name": "Nightlife"}
+
+{"id": 9902,
+"name": "Amusement Park"}
+
+{"id": 7377,
+"name": "College/University"}
+
+{"id": 9932,
+"name": "Public Amenity"}
+
+{"id": 9364,
+"name": "Marijuana Dispensary"}
+
+{"id": 9361,
+"name": "Shop"}
+
+{"id": 9376,
+"name": "Cafe"}
+
+{"id": 7321,
+"name": "Hospital"}
+
+{"id": 7315,
+"name": "Restaurant"}
+
+{"id": 7320,
+"name": "Sports"}

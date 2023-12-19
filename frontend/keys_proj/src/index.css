@@ -115,8 +115,6 @@ div.card-body {
     overflow: wrap; 
 }
 
-
-
 div.card-title {
     display: flex;
     min-height: 40px;
@@ -342,11 +340,27 @@ input {
     margin-bottom: 10px;
 }
 
-#schools_div {
+#interests_div {
     background-color: #d9bda4;
     border-radius: 20px;
     padding: 15px;
     margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+#school_div {
+    background-color: #d9bda4;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
     
 }
 
@@ -356,6 +370,7 @@ input {
     padding: 15px;
     margin-bottom: 10px;
     height: fit-content;
+    width: 100%
 }
 
 .thoughts_div {
@@ -364,13 +379,18 @@ input {
     padding: 15px;
     margin-bottom: 5px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
 }
 
 #thought_textarea {
-    width: 90vw;
+    width: 100%;
     border: none;
     border-radius: 20px;
     padding: 15px;
+    float: none;
     
 }
 
