@@ -27,13 +27,19 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
     const [exteriorFeatures, setExteriorFeatures] = useState([])
     const [hide, setHide] = useState('')
 
+    const [commaPrice, setCommaPrice] = useState()
+
+    const numberWithCommas = () => {
+        setCommaPrice(house.listPrice.toLocaleString('en-US'));
+    };
+
     //////////////////////////////////////////////MATCHING MECHANICS///////////////////////////////////////////////////////
     
     const bedroomsMatch = () => {
         if (preferences && house && preferences[0]) {
         console.log(preferences[0].bedrooms)
-            if (preferences[0].bedrooms === house.bedrooms){
-                setBedroomsColor("#7b904b")
+            if (preferences[0].bedrooms <= house.bedrooms){
+                setBedroomsColor("#c9d4a9")
             }
             else {
                 setBedroomsColor("#f2a594")
@@ -43,8 +49,8 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
 
     const bathroomsMatch = () => {
         if (preferences && house && preferences[0]) {
-            if (preferences[0].bathrooms === house.property.bathsFull){
-                setBathroomsColor("#7b904b")
+            if (preferences[0].bathrooms <= house.property.bathsFull){
+                setBathroomsColor("#c9d4a9")
             }
             else {
                 setBathroomsColor("#f2a594")
@@ -63,7 +69,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
     const parkingMatch = () => {
         if (preferences && house) {
             if (house.property.parking.description){
-                setParkingColor("#7b904b")
+                setParkingColor("#c9d4a9")
             }
             else if (house.property.parking === 'None' || house.property.parking === null || house.property.parking === 'none') {
                 setParkingColor("#d4593d")
@@ -75,16 +81,16 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
     }
 
     const dishwasherMatch = () => {
-        if (preferences && house) {
-            if (house.property.dishwasher === 'None' || house.property.dishwasher === null || house.property.dishwasher === 'none'){
-                setDishwasherColor("#7b904b")
+        if (preferences) {
+            //console.log("this dishwasher", preferences[0].dishwasher, house.property.dishwasher)
+            if (preferences[0].dishwasher === house.property.dishwasher){
+                setDishwasherColor("#c9d4a9")
             }
-            else if (house.property.dishwasher && preferences[0].dishwasher === house.property.dishwasher.toLowerCase()){
-                setDishwasherColor("#d4593d")
+            else if (house.property.dishwasher === 'None' || house.property.dishwasher === null || house.property.dishwasher === 'none' || house.property.dishwasher === undefined && preferences[0].dishwasher === true) {
+                setDishwasherColor("#f2a594")
             }
         }
     }
-
        // refactor possibly by placing all elements in a list and mapping/filtering through them for existence and preference. Possibly group lists by similar traits to make it easier to populate.
     const fireplaceExists = () => {
             if (house.property.fireplaces === null){
@@ -114,7 +120,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
             }
         else {
             if (house.property.laundry && preferences[0].laundry === house.property.laundry.toLowerCase()){
-                setLaundryColor("#7b904b")
+                setLaundryColor("#c9d4a9")
             }
             else {
                 setLaundryColor("whitesmoke")
@@ -125,17 +131,18 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
 
     const heatingExists = () => {
         if (preferences && house && preferences[0]) {
+            console.log("heating check", preferences[0].heating, house.property.heating)
             if (house.property.heating === 'None' || house.property.heating === null || house.property.heating === 'none'){
                 setHeatingCheck("none")
                 setHeatingColor("#d4593d")
             }
             else if (preferences[0].heating === 'radiant' && house.property.heating === 'Radiant Heat') {
-                setHeatingColor("#7b904b")
+                setHeatingColor("#c9d4a9")
             }
             else {
                 setHeatingCheck("inline")
                 if (preferences[0].heating === house.property.heating.toLowerCase()){
-                    setHeatingColor("#7b904b")
+                    setHeatingColor("#c9d4a9")
                 }
                 else {
                     setHeatingColor("whitesmoke")
@@ -151,7 +158,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
         else {
             setCoolingCheck("inline")
             if (preferences[0].cooling === house.property.cooling.toLowerCase()){
-                setCoolingColor("#7b904b")
+                setCoolingColor("#c9d4a9")
             }
             else {
                 setCoolingColor("whitesmoke")
@@ -196,7 +203,8 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
         heatingExists()
         coolingExists()
         extraFeaturesParsing()
-        console.log('Card re-rendered'); // Log when the component re-renders
+        numberWithCommas()
+        console.log('Base Card re-rendered'); // Log when the component re-renders
     }, [likes, dislikes]);
 
 
@@ -220,7 +228,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
                 ))}
             </Carousel>
             <Card.Body>
-            <Card.Title>${house.listPrice} - {house.address.full} - {house.property.yearBuilt}</Card.Title>
+            <Card.Title>${commaPrice} - {house.address.full} - {house.property.yearBuilt}</Card.Title>
                 <div id="base_card_details_div">
                 {house ? (
                 <>

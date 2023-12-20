@@ -46,8 +46,8 @@ function Buttons({house, preferences}) {
     const bedroomsMatch = () => {
         if (preferences) {
         console.log(preferences[0].bedrooms)
-            if (preferences[0].bedrooms === house.bedrooms){
-                setBedroomsColor("#7b904b")
+            if (preferences[0].bedrooms <= house.bedrooms){
+                setBedroomsColor("#c9d4a9")
             }
             else {
                 setBedroomsColor("#f2a594")
@@ -57,8 +57,8 @@ function Buttons({house, preferences}) {
 
     const bathroomsMatch = () => {
         if (preferences) {
-            if (preferences[0].bathrooms === house.property.bathsFull){
-                setBathroomsColor("#7b904b")
+            if (preferences[0].bathrooms <= house.property.bathsFull){
+                setBathroomsColor("#c9d4a9")
             }
             else {
                 setBathroomsColor("#f2a594")
@@ -77,10 +77,10 @@ function Buttons({house, preferences}) {
     const parkingMatch = () => {
         if (preferences) {
             if (preferences[0].parking === house.property.parking.description){
-                setParkingColor("#7b904b")
+                setParkingColor("#c9d4a9")
             }
-            else if (house.property.parking === 'None' || house.property.parking === null || house.property.parking === 'none') {
-                setParkingColor("#d4593d")
+            else if (house.property.parking === 'None' || house.property.parking === null || house.property.parking === 'none' || house.property.parking.description === 0) {
+                setParkingColor("#f2a594")
             }
             else {
                 setParkingColor("#f5daaa")
@@ -90,11 +90,12 @@ function Buttons({house, preferences}) {
 
     const dishwasherMatch = () => {
         if (preferences) {
+            //console.log("this dishwasher", preferences[0].dishwasher, house.property.dishwasher)
             if (preferences[0].dishwasher === house.property.dishwasher){
-                setDishwasherColor("#7b904b")
+                setDishwasherColor("#c9d4a9")
             }
-            else if (house.property.dishwasher === 'None' || house.property.dishwasher === null || house.property.dishwasher === 'none') {
-                setDishwasherColor("#d4593d")
+            else if (house.property.dishwasher === 'None' || house.property.dishwasher === null || house.property.dishwasher === 'none' || house.property.dishwasher === undefined && preferences[0].dishwasher === true) {
+                setDishwasherColor("#f2a594")
             }
         }
     }
@@ -128,7 +129,7 @@ function Buttons({house, preferences}) {
             }
         else {
             if (preferences[0].laundry === house.property.laundry){
-                setLaundryColor("#7b904b")
+                setLaundryColor("#c9d4a9")
             }
             else {
                 setLaundryColor("whitesmoke")
@@ -140,12 +141,12 @@ function Buttons({house, preferences}) {
     const heatingExists = () => {
         if (house.property.heating === 'None' || house.property.heating === null || house.property.heating === 'none'){
             setHeatingCheck("none")
-            setHeatingColor("#d4593d")
+            setHeatingColor("#f2a594")
         }
         else {
             setHeatingCheck("inline")
             if (preferences[0].heating === house.property.heating){
-                setHeatingColor("#7b904b")
+                setHeatingColor("#c9d4a9")
             }
             else {
                 setHeatingColor("whitesmoke")
@@ -160,7 +161,7 @@ function Buttons({house, preferences}) {
         else {
             setCoolingCheck("inline")
             if (preferences[0].cooling === house.property.cooling){
-                setCoolingColor("#7b904b")
+                setCoolingColor("#c9d4a9")
             }
             else {
                 setCoolingColor("whitesmoke")
@@ -196,7 +197,7 @@ function Buttons({house, preferences}) {
         heatingExists()
         coolingExists()
         extraFeaturesParsing()
-        console.log('Card re-rendered'); // Log when the component re-renders
+        console.log('Details re-rendered'); // Log when the component re-renders
     }, []);
 
 
@@ -204,38 +205,38 @@ function Buttons({house, preferences}) {
 
 
     return (
-        <div id="base_card_details_div">
+        <div>
         {house ? (
         <>
-            <div id='button_div' >
-            <button className='buttons' style={{backgroundColor:bedroomsColor}}>
+            <div id='details_button_div' >
+            <button className='interests_buttons' style={{backgroundColor:bedroomsColor}}>
                 {house.property.bedrooms} Bedrooms
             </button>
-            <button className='buttons' style={{backgroundColor:bathroomsColor}}>
+            <button className='interests_buttons' style={{backgroundColor:bathroomsColor}}>
                 {house.property.bathsFull} Bathrooms
             </button>
-            <button className='buttons'>
+            <button className='interests_buttons'>
                 {house.property.style}
             </button >
-            <button className='buttons' style={{display:coolingCheck, backgroundColor:coolingColor}}>
+            <button className='interests_buttons' style={{display:coolingCheck, backgroundColor:coolingColor}}>
                 {house.property.cooling}
             </button>
-            <button className='buttons' style={{display:heatingCheck, backgroundColor:heatingColor}}>
+            <button className='interests_buttons' style={{display:heatingCheck, backgroundColor:heatingColor}}>
                 {house.property.heating}
             </button>
-            <button className='buttons'>
+            <button className='interests_buttons'>
                 {house.property.area}sqft
             </button>
-            <button className='buttons'>
+            <button className='interests_buttons'>
                 {house.property.view} View
             </button >
-            <button className='buttons' style={{display:fireplaceCheck, backgroundColor:fireplaceColor}}>
+            <button className='interests_buttons' style={{display:fireplaceCheck, backgroundColor:fireplaceColor}}>
             Fireplace
             </button>
             {interiorFeatures.map((feature, index) => (
-                <button key={index} className='buttons' style={{backgroundColor:'#f5daaa', display:hide}}>{feature}</button>
+                <button key={index} className='interests_buttons' style={{backgroundColor:'#f5daaa', display:hide}}>{feature}</button>
             ))}
-            <button className="buttons" style={{backgroundColor:dishwasherColor}}>Dishwasher</button>
+            <button className="interests_buttons" style={{backgroundColor:dishwasherColor}}>Dishwasher</button>
             {exteriorFeatures.map((feature, index) => (
                 <button key={index} className='buttons' style={{backgroundColor:'#f5daaa', display:hide}}>{feature}</button>
             ))}

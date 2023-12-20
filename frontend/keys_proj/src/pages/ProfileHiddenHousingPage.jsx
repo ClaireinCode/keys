@@ -61,9 +61,9 @@ const ProfileHiddenHousingPage = () => {
       getDislikes()
     },[])
         
-    const handleDoubleClick = (houseId) => {
+    const handleClick = (houseId) => {
       console.log("mic check", houseId)
-      //navigate(`/house_details/${houseId}`)
+      navigate(`/house_details/${houseId}`)
     }
     console.log("sldjfd", houses)
     return (
@@ -78,7 +78,7 @@ const ProfileHiddenHousingPage = () => {
                 dislikes={dislikes}
                 setLikes={setLikes}
                 likes={likes}
-                handleDoubleClick={handleDoubleClick}
+                handleClick={handleClick}
               />
             ))
           ) : (

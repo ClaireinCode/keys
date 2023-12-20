@@ -85,7 +85,7 @@
 .base_card {
     display: flex;
     flex-direction: column;
-    background-color: #c9d4a9;
+    background-color: #f2d2b6;
     height: 750px;
     min-width: 600px;
     border: 4px solid whitesmoke;
@@ -102,7 +102,7 @@
 #base_card_details_div {
     display: flex;
     flex-direction: row;
-    background-color: #d8dbcc;
+    background-color: #d9bda4;
     border-radius: 20px; 
     height: 300px;
     padding: 4px;
@@ -352,6 +352,23 @@ input {
     
 }
 
+#interests_button_div {
+    min-width: 550px;
+    border-radius: 10px;
+    padding: 5px;
+    height: 100%;
+}
+
+.interests_buttons {
+    margin: 3px;
+    border: 2px #775d44;
+    padding: 7px;
+    border-radius: 5px;
+    background-color: rgba(whitesmoke);
+    color: #775d44;
+    border-style: solid;
+}
+
 #school_div {
     background-color: #d9bda4;
     border-radius: 20px;
@@ -381,17 +398,14 @@ input {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    
+    justify-content: center;  
 }
 
 #thought_textarea {
     width: 100%;
     border: none;
     border-radius: 20px;
-    padding: 15px;
-    float: none;
-    
+    padding: 15px;  
 }
 
 /* Like/Dislike Page ////////////////////////////////////////////////////////////////////////*/
@@ -405,11 +419,14 @@ input {
 
 #liked_card {
     display: flex;
-    margin-top: 100px;  
+    margin-top: 100px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    
 }
 
 .liked_cards_base{
-    background-color: #c9d4a9;
+    background-color: #f2d2b6;
     margin: 1vw;  
     min-width: 400px;
     max-width: 400px;
@@ -429,16 +446,24 @@ input {
 }
 .liked_card_text {
     display: flex;
-    background-color: #d8dbcc;
+    background-color: #d9bda4;
     border-radius: 10px;
     height: 100px;
     padding: 5px;
     color: #775d44;
 }
-.liked_butttons {
+.liked_buttons {
     background-color: #bf7a7a;
-    margin: 10px;
-    color: #d8dbcc;
+    margin: 2px;
+    color: whitesmoke;
+    border: none;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.liked_buttons:hover {
+    background-color: whitesmoke;
+    color:  #bf7a7a;
 }
 
 /* Preferences Page /////////////////////////////////////////////////////////////////////// */

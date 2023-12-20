@@ -61,10 +61,11 @@ const ProfileHousingPage = () => {
     getLikes()
   },[])
       
-  const handleDoubleClick = (houseId) => {
-    console.log("mic check")
-    // navigate(`/house_details/${houseId}`)
+  const handleClick = (houseId) => {
+    console.log("mic check", houseId)
+    navigate(`/house_details/${houseId}`)
   }
+
   console.log("sldjfd", houses)
   return (
       <div id="liked_card_page">
@@ -78,7 +79,7 @@ const ProfileHousingPage = () => {
               dislikes={dislikes}
               setLikes={setLikes}
               likes={likes}
-              handleDoubleClick={handleDoubleClick}
+              handleClick={handleClick}
             />
           ))
         ) : (

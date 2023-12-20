@@ -16,6 +16,7 @@ const HousingDetailsPage = () => {
     const [position, setPosition] = useState(null)
     const [currentZipcode, setCurrentZipcode] = useState()
     const [pointsofInterest, setPointsofInterest] = useState([])
+    const [commaPrice, setCommaPrice] = useState()
     const [trigger, setTrigger] = useState(true)
     const { house_id } = useParams();
     const { isLoggedIn } = useOutletContext()
@@ -27,7 +28,8 @@ const HousingDetailsPage = () => {
     const credentials = btoa(`${apiKey}:${apiSecret}`);
 
     //tomtom
-    const ttApiKey = import.meta.env.VITE_TOMTOM_API_KEY
+    //const ttApiKey = import.meta.env.VITE_TOMTOM_API_KEY
+    
   
     //console.log("no key",ttApiKey)
 
@@ -39,7 +41,7 @@ const HousingDetailsPage = () => {
             }
         })
         setHouse(response.data)
-        //getCoordinates()  
+        getCoordinates()
     }
 
     const getCoordinates = async () => {
@@ -52,7 +54,8 @@ const HousingDetailsPage = () => {
                                     console.error("Zipcode not found",err)})
         setPosition(response.data.results[0].position)
         console.log("are we null here or...?",position)
-        //getPointsofInterest()
+        getPointsofInterest()
+        numberWithCommas()
     }
 
     const getPointsofInterest = async () => {
@@ -129,12 +132,23 @@ const HousingDetailsPage = () => {
         }
     }
 
-    console.log("POI",pointsofInterest)
+    
+
+    const numberWithCommas = () => {
+        //console.log("housedetails",house.listPrice)
+        setCommaPrice(house.listPrice.toLocaleString('en-US'));
+    };
+
+    const handleDoubleClick = () => {
+        navigate(`/houses`)
+    }
+
+    //console.log("POI",pointsofInterest)
 
     return (
         <>
         <div id="details_page_div">
-            <div id="details_div">
+            <div id="details_div" onDoubleClick={handleDoubleClick}>
                 {house ? (
                     <>
                     <div id="picture_div">
@@ -148,7 +162,7 @@ const HousingDetailsPage = () => {
                         </Row>
                     </Container>
                     </div>
-                    <div id="major_deets_div"><h3>${house.listPrice} - {house.address.full} - {house.property.yearBuilt}</h3></div>
+                    <div id="major_deets_div"><h3>${commaPrice} - {house.address.full} - {house.property.yearBuilt}</h3></div>
                     <div id="remarks_div"><p>{house.privateRemarks.toLowerCase()}</p></div>
                     <div id="minor_deets_div">
                     <Buttons
