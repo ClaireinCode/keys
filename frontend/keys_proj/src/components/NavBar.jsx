@@ -29,17 +29,19 @@ function NavBar({user, isLoggedIn, logout}) {
   return (
     <Navbar expand="lg" className="navbar" style={navbarStyle}>
       <Container>
-        <Link to={housesLink}>
+        <Link to={housesLink} className="nav_link">
         <Navbar.Brand>
+        <div id="nav_brand">
           <img
             alt="picture"
-            src="/src/assets/noun-key-679919.svg"
+            src="src/assets/key-chain_4426981.png"
             width="30"
             height="30"
             className="d-inline-block align-top"
+            id="logo_pic"
           />
-          {' '}
-          Keys
+          <h4 id="nav_keys">Keys</h4>
+          </div>
         </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -52,7 +54,7 @@ function NavBar({user, isLoggedIn, logout}) {
           </Navbar.Collapse>
         <Navbar.Collapse className="justify-content-end">
             <Navbar.Text className="me-3">
-              <Link to={logLink} onClick={action}>{logWords}</Link>
+              <Link to={logLink} onClick={action} className="nav_link">{logWords}</Link>
             </Navbar.Text>
           </Navbar.Collapse>
         </Navbar.Collapse>
