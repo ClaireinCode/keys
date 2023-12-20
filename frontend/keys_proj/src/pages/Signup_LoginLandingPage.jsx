@@ -9,16 +9,16 @@ const Signup_LoginLandingPage = () => {
     const { isLoggedIn } = useOutletContext()
     const navigate = useNavigate()
 
-    const backgroundImage = {
-        backgroundImage: 'url("src/assets/chicago3.jpeg")',
-        backgroundSize: 'cover', // Adjust the background size as needed
-        backgroundPosition: 'center center', // Adjust the background position as needed
-        height: '100vh', // Set the height of the container to 100% of the viewport height
-        margin: 0, // Remove default margin on body
-        padding: 0, // Remove default padding on body
-        display: 'flex',
-        flexDirection: 'column',
-    };
+    // const backgroundImage = {
+    //     backgroundImage: 'url("src/assets/chicago3.jpeg")',
+    //     backgroundSize: 'cover', // Adjust the background size as needed
+    //     backgroundPosition: 'center center', // Adjust the background position as needed
+    //     height: '100vh', // Set the height of the container to 100% of the viewport height
+    //     margin: 0, // Remove default margin on body
+    //     padding: 0, // Remove default padding on body
+    //     display: 'flex',
+    //     flexDirection: 'column',
+    // };
 
     useEffect(() => {
         if (isLoggedIn === true) {
@@ -27,7 +27,15 @@ const Signup_LoginLandingPage = () => {
     })
 
     return (
-        <div style={backgroundImage} id='basediv_landing'>
+        <div id='basediv_landing'>
+            <div id="background_images">
+                <div id="image1"></div>
+                <div id="image2"></div>
+                <div id="image3"></div>
+                <div id="image4"></div>
+                <div id="image5"></div>
+                <div id="image6"></div>
+            </div>
             <div className="mb-2" id='landing'>
                 <div className='landing_title_holder'>
                     <div className='landing_shield'></div>
@@ -37,7 +45,7 @@ const Signup_LoginLandingPage = () => {
                 <Link to="signup">
                     <Button className='landing_button' variant="outline-light" size="lg">
                     Sign Up
-                    </Button>{' '}
+                    </Button>
                 </Link>
                 <Link to="login">
                     <Button className='landing_button' variant="outline-light" size="lg">

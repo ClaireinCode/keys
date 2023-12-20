@@ -29,6 +29,7 @@ const HousingDetailsPage = () => {
 
     //tomtom
     //const ttApiKey = import.meta.env.VITE_TOMTOM_API_KEY
+    //const ttApiKey = 
     
   
     //console.log("no key",ttApiKey)
