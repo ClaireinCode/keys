@@ -8,15 +8,16 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Buttons from '../components/Buttons';
 
+
 const HousingDetailsPage = () => {
     const [house, setHouse] = useState(null)
     const [allThoughts, setAllThoughts] = useState([])
     const [thought, setThought] = useState("")
     const [preferences, setPreferences] = useState([])
     const [position, setPosition] = useState(null)
-    const [currentZipcode, setCurrentZipcode] = useState()
+    const [currentZipcode, setCurrentZipcode] = useState(77097)
     const [pointsofInterest, setPointsofInterest] = useState([])
-    const [commaPrice, setCommaPrice] = useState()
+    const [commaPrice, setCommaPrice] = useState(0)
     const [trigger, setTrigger] = useState(true)
     const { house_id } = useParams();
     const { isLoggedIn } = useOutletContext()
@@ -28,8 +29,8 @@ const HousingDetailsPage = () => {
     const credentials = btoa(`${apiKey}:${apiSecret}`);
 
     //tomtom
-    //const ttApiKey = import.meta.env.VITE_TOMTOM_API_KEY
-    //const ttApiKey = 
+    const ttApiKey = import.meta.env.VITE_TOMTOM_API_KEY
+    
     
   
     //console.log("no key",ttApiKey)
@@ -41,27 +42,29 @@ const HousingDetailsPage = () => {
                 'Authorization': `Basic ${credentials}`
             }
         })
-        setHouse(response.data)
-        getCoordinates()
+        setHouse(response.data)    
     }
 
     const getCoordinates = async () => {
         console.log(house.address.postalCode)
-        setCurrentZipcode(house.address.postalCode)
-        console.log("zipcode",currentZipcode)
-        let response = await axios
+        if (house.address.postalCode !== null){
+            setCurrentZipcode(house.address.postalCode)
+            console.log("zipcode",currentZipcode)
+            let response = await axios
                                 .get(`https://api.tomtom.com/search/2/geocode/${currentZipcode}%20United%20States.json?key=${ttApiKey}`)
                                 .catch((err) => {
                                     console.error("Zipcode not found",err)})
-        setPosition(response.data.results[0].position)
-        console.log("are we null here or...?",position)
-        getPointsofInterest()
-        numberWithCommas()
+                                            
+            setPosition(response.data.results[0].position)
+            console.log("are we null here or...?",position)
+            getPointsofInterest()
+            numberWithCommas()
+        }
     }
 
     const getPointsofInterest = async () => {
         let poi = await axios
-                            .get(`https://api.tomtom.com/search/2/nearbySearch/.json?key=${ttApiKey}&lat=${position.lat}&lon=${position.lon}&radius=1610&limit=10&categoryset=7315`)
+                            .get(`https://api.tomtom.com/search/2/nearbySearch/.json?key=${ttApiKey}&lat=${position.lat}&lon=${position.lon}&radius=1610&limit=20&categoryset=7315`)
                             .catch((err) => {
                                     console.error("No interesting places!")
                                     })
@@ -105,6 +108,13 @@ const HousingDetailsPage = () => {
         getAllThoughts()
         //getPointsofInterest()
     }, [])
+
+    useEffect(() => {
+        if (house !== null){
+            getCoordinates()
+            numberWithCommas()
+        }
+    }, [house])
 
     useEffect(() => {
         getAllThoughts()
@@ -170,14 +180,14 @@ const HousingDetailsPage = () => {
                     house={house}
                     preferences={preferences}/>
                     </div>
-                    <div id="interests_div">
-                    {pointsofInterest.length > 0 ? (pointsofInterest.map((interest, index) => (
-                        <button className="interests_buttons" key={index}>{interest.poi.categories[0]}: {interest.poi.name}</button>))):( <h5>No interesting places nearby...</h5>)}</div>
                     <div id="school_div">
                         <p>Elementary School: {house.school.elementarySchool}</p>
                         <p>Middle School: {house.school.middleSchool}</p>
                         <p>High School: {house.school.highSchool}</p>
                     </div>
+                    <div id="interests_div">
+                    {pointsofInterest.length > 0 ? (pointsofInterest.map((interest, index) => (
+                        <button className="interests_buttons" key={index}>{interest.poi.categories[0]}: {interest.poi.name}</button>))):( <h5>No interesting places nearby...</h5>)}</div>
                     <div id="contact_div">
                         <h5>{house.agent.contact.firstName} {house.agent.contact.lastName}</h5>
                         <p>Cell: {house.agent.contact.cell}</p>

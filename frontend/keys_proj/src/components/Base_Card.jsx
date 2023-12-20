@@ -27,7 +27,11 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
     const [exteriorFeatures, setExteriorFeatures] = useState([])
     const [hide, setHide] = useState('')
 
-    const [commaPrice, setCommaPrice] = useState()
+    const [commaPrice, setCommaPrice] = useState(0)
+
+    const green_color = '#c7cfb1'
+    const red_color = '#f2a594'
+    const gold_color = 'rgb(237, 217, 181)'
 
     const numberWithCommas = () => {
         setCommaPrice(house.listPrice.toLocaleString('en-US'));
@@ -39,10 +43,10 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
         if (preferences && house && preferences[0]) {
         console.log(preferences[0].bedrooms)
             if (preferences[0].bedrooms <= house.bedrooms){
-                setBedroomsColor("#c9d4a9")
+                setBedroomsColor(green_color)
             }
             else {
-                setBedroomsColor("#f2a594")
+                setBedroomsColor(red_color)
             }
         }
     }
@@ -50,7 +54,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
     const bathroomsMatch = () => {
         if (preferences && house && preferences[0]) {
             if (preferences[0].bathrooms <= house.property.bathsFull){
-                setBathroomsColor("#c9d4a9")
+                setBathroomsColor(green_color)
             }
             else {
                 setBathroomsColor("#f2a594")
@@ -58,18 +62,10 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
         }
     }
 
-    // const neighborhoodMatch = () => {
-    //     if (preferences[0].neighborhood) {
-    //         if (preferences[0].neighborhood === house.neighborhood){
-    //             setNeighborhoodColor("#7b904b")
-    //         }
-    //     }
-    // }
-
     const parkingMatch = () => {
         if (preferences && house) {
             if (house.property.parking.description){
-                setParkingColor("#c9d4a9")
+                setParkingColor(green_color)
             }
             else if (house.property.parking === 'None' || house.property.parking === null || house.property.parking === 'none') {
                 setParkingColor("#d4593d")
@@ -84,10 +80,10 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
         if (preferences) {
             //console.log("this dishwasher", preferences[0].dishwasher, house.property.dishwasher)
             if (preferences[0].dishwasher === house.property.dishwasher){
-                setDishwasherColor("#c9d4a9")
+                setDishwasherColor(green_color)
             }
             else if (house.property.dishwasher === 'None' || house.property.dishwasher === null || house.property.dishwasher === 'none' || house.property.dishwasher === undefined && preferences[0].dishwasher === true) {
-                setDishwasherColor("#f2a594")
+                setDishwasherColor(gold_color)
             }
         }
     }
@@ -98,7 +94,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
             }
             else {
                 setFireplaceCheck("inline")
-                setFireplaceColor("#f5daaa")
+                setFireplaceColor(gold_color)
             };
         
     };
@@ -109,7 +105,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
         }
         else {
             setPoolCheck("inline")
-            setPoolColor("#f5daaa")
+            setPoolColor(gold_color)
         };
     };
 
@@ -120,7 +116,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
             }
         else {
             if (house.property.laundry && preferences[0].laundry === house.property.laundry.toLowerCase()){
-                setLaundryColor("#c9d4a9")
+                setLaundryColor(green_color)
             }
             else {
                 setLaundryColor("whitesmoke")
@@ -137,12 +133,12 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
                 setHeatingColor("#d4593d")
             }
             else if (preferences[0].heating === 'radiant' && house.property.heating === 'Radiant Heat') {
-                setHeatingColor("#c9d4a9")
+                setHeatingColor(green_color)
             }
             else {
                 setHeatingCheck("inline")
                 if (preferences[0].heating === house.property.heating.toLowerCase()){
-                    setHeatingColor("#c9d4a9")
+                    setHeatingColor(green_color)
                 }
                 else {
                     setHeatingColor("whitesmoke")
@@ -158,7 +154,7 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
         else {
             setCoolingCheck("inline")
             if (preferences[0].cooling === house.property.cooling.toLowerCase()){
-                setCoolingColor("#c9d4a9")
+                setCoolingColor(green_color)
             }
             else {
                 setCoolingColor("whitesmoke")
@@ -258,11 +254,11 @@ function Base_Card({house, onSwipeLeft, onSwipeRight, likes, dislikes, handleDou
                     Fireplace
                     </button>
                     {interiorFeatures.map((feature, index) => (
-                        <button key={index} className='buttons' style={{backgroundColor:'#f5daaa', display:hide}}>{feature}</button>
+                        <button key={index} className='buttons' style={{backgroundColor:gold_color, display:hide}}>{feature}</button>
                     ))}
                     <button className="buttons" style={{backgroundColor:dishwasherColor}}>Dishwasher</button>
                     {exteriorFeatures.map((feature, index) => (
-                        <button key={index} className='buttons' style={{backgroundColor:'#f5daaa', display:hide}}>{feature}</button>
+                        <button key={index} className='buttons' style={{backgroundColor:gold_color, display:hide}}>{feature}</button>
                     ))}
                     <button className='buttons' style={{backgroundColor:parkingColor}}>
                         {house.property.parking.description} 

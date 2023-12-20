@@ -11,7 +11,6 @@ const HousingPage = () => {
     const [preferences, setPreferences] = useState()
     const {likes, setLikes, setDislikes, dislikes, isLoggedIn} = useOutletContext();
 
-
    //simplyrets
     const apiKey = 'simplyrets';
     const apiSecret = 'simplyrets'
@@ -108,7 +107,7 @@ const HousingPage = () => {
     useEffect(() => {
         // Log the updated likes whenever it changes
         console.log("Updated likes in useEffect:", likes);
-        console.log("and", houses)
+        //console.log("and", houses)
     }, [likes]);
 
     const handleSwipeRight = () => {

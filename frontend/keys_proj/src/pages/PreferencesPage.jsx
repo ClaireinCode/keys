@@ -289,7 +289,7 @@ const PreferencesPage = () => {
                 <option>No Parking</option>
                 </Form.Select>
             </Form.Group>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" id="preference_button">Submit</Button>
         </Form>
         </div>
     </div>
