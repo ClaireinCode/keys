@@ -34,7 +34,7 @@ function NavBar({user, isLoggedIn, logout}) {
         <div id="nav_brand">
           <img
             alt="picture"
-            src="src/assets/key-chain_4426981.png"
+            src="./src/assets/key-chain_4426981.png"
             width="30"
             height="30"
             className="d-inline-block align-top"

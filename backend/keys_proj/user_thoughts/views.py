@@ -61,7 +61,7 @@ class A_thought(UserPermissions):
     def delete(self, request, thought_id):
         thought = self.get_a_thought(request.user, thought_id)
         if thought:
-            list.delete()
+            thought.delete()
             return Response(status=HTTP_204_NO_CONTENT)
         return Response("OBJECT DOES NOT EXIST", status=HTTP_404_NOT_FOUND)
     

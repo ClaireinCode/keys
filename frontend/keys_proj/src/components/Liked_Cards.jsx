@@ -28,8 +28,8 @@ function Liked_Card({cardData, handleClick}) {
       <Card.Body>
         <Card.Title className="liked_card_title">${commaPrice}<br></br>{cardData.address.full}</Card.Title>
         <Card.Text className='liked_card_text'>
-          Status: {cardData.mls.status}<br></br>Days on the Market: {cardData.mls.daysOnMarket}<br></br>{house.agent.contact.firstName} {house.agent.contact.lastName}<br></br>
-          Cell: {house.agent.contact.cell}<br></br>Email: {house.agent.contact.email}
+          Status: {cardData.mls.status}<br></br>Days on the Market: {cardData.mls.daysOnMarket}<br></br>{cardData.agent.contact.firstName} {cardData.agent.contact.lastName}<br></br>
+          Cell: {cardData.agent.contact.cell}<br></br>Email: {cardData.agent.contact.email}
         </Card.Text>
       </Card.Body>
       <Card.Footer>

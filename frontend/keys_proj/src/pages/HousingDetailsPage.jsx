@@ -15,7 +15,7 @@ const HousingDetailsPage = () => {
     const [thought, setThought] = useState("")
     const [preferences, setPreferences] = useState([])
     const [position, setPosition] = useState(null)
-    const [currentZipcode, setCurrentZipcode] = useState(77097)
+    const [currentZipcode, setCurrentZipcode] = useState()
     const [pointsofInterest, setPointsofInterest] = useState([])
     const [commaPrice, setCommaPrice] = useState(0)
     const [trigger, setTrigger] = useState(true)
@@ -30,8 +30,6 @@ const HousingDetailsPage = () => {
 
     //tomtom
     const ttApiKey = import.meta.env.VITE_TOMTOM_API_KEY
-    
-    
   
     //console.log("no key",ttApiKey)
 
@@ -42,14 +40,15 @@ const HousingDetailsPage = () => {
                 'Authorization': `Basic ${credentials}`
             }
         })
-        setHouse(response.data)    
+        setHouse(response.data)
+        setZipcode()
     }
 
     const getCoordinates = async () => {
-        console.log(house.address.postalCode)
-        if (house.address.postalCode !== null){
-            setCurrentZipcode(house.address.postalCode)
             console.log("zipcode",currentZipcode)
+            if (currentZipcode === null || currentZipcode === undefined) {
+                setCurrentZipcode(77077)
+            }
             let response = await axios
                                 .get(`https://api.tomtom.com/search/2/geocode/${currentZipcode}%20United%20States.json?key=${ttApiKey}`)
                                 .catch((err) => {
@@ -59,8 +58,8 @@ const HousingDetailsPage = () => {
             console.log("are we null here or...?",position)
             getPointsofInterest()
             numberWithCommas()
-        }
     }
+    
 
     const getPointsofInterest = async () => {
         let poi = await axios
@@ -70,6 +69,15 @@ const HousingDetailsPage = () => {
                                     })
         setPointsofInterest(poi.data.results)
         console.log(poi.data)
+    }
+
+
+    const setZipcode = () => {
+        console.log(house.address.postalCode)
+        if (house.address.postalCode !== null){
+            setCurrentZipcode(house.address.postalCode) 
+            getCoordinates()  
+        }
     }
 
     const getPreferences = async() => {
@@ -110,7 +118,7 @@ const HousingDetailsPage = () => {
     }, [])
 
     useEffect(() => {
-        if (house !== null){
+        if (house){
             getCoordinates()
             numberWithCommas()
         }
@@ -143,7 +151,12 @@ const HousingDetailsPage = () => {
         }
     }
 
-    
+    // const determineButtonColor = (interest) => {
+    //     for (let i = 0; i < pointsofInterest.length; i++){
+    //         if (preferences[0].interests === pointsofInterest[i].poi.categories[0])
+            
+    //     }
+    // }
 
     const numberWithCommas = () => {
         //console.log("housedetails",house.listPrice)
@@ -187,7 +200,12 @@ const HousingDetailsPage = () => {
                     </div>
                     <div id="interests_div">
                     {pointsofInterest.length > 0 ? (pointsofInterest.map((interest, index) => (
-                        <button className="interests_buttons" key={index}>{interest.poi.categories[0]}: {interest.poi.name}</button>))):( <h5>No interesting places nearby...</h5>)}</div>
+                        <button 
+                        className="interests_buttons" 
+                        key={index}
+                        style={{ backgroundColor: determineButtonColor(interest)}}>
+                            {interest.poi.categories[0]}: {interest.poi.name}
+                        </button>))):( <h5>No interesting places nearby...</h5>)}</div>
                     <div id="contact_div">
                         <h5>{house.agent.contact.firstName} {house.agent.contact.lastName}</h5>
                         <p>Cell: {house.agent.contact.cell}</p>
