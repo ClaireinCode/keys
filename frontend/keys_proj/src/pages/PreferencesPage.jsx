@@ -8,7 +8,7 @@ const PreferencesPage = () => {
     const [home_type, setHome_type] = useState()
     const [bedrooms, setBedrooms] = useState()
     const [bathrooms, setBathrooms] = useState()
-    const [neighborhood, setNeighborhood] = useState()
+    const [interests, setInterests] = useState()
     const [laundry, setLaundry] = useState()
     const [cooling, setCooling] = useState()
     const [heating, setHeating] = useState()
@@ -26,7 +26,7 @@ const PreferencesPage = () => {
             "home_type":home_type,
             "bedrooms":bedrooms,
             "bathrooms":bathrooms,
-            "neighborhood":neighborhood,
+            "interests":interests,
             "laundry":laundry,
             "cooling":cooling,
             "heating":heating,
@@ -83,92 +83,6 @@ const PreferencesPage = () => {
                 <option>House</option>
                 <option>Condominium</option>
                 <option>Multifamily</option>
-                </Form.Select>
-            </Form.Group>
-            <Form.Group className="mb-3">
-                <Form.Label>Neighborhood</Form.Label>
-                <Form.Select 
-                    id="neighborhood"
-                    value={neighborhood}
-                    onChange={(e) => setNeighborhood(e.target.value)}>
-                <option></option>
-                <option>Albany Park</option>
-                <option>Archer Heights</option>
-                <option>Armour Square</option>
-                <option>Ashburn</option>
-                <option>Auburn Gresham</option>
-                <option>Austin</option>
-                <option>Avalon Park</option>
-                <option>Avondale</option>
-                <option>Belmont Cragin</option>
-                <option>Beverly</option>
-                <option>Bridgeport</option>
-                <option>Brighton Park</option>
-                <option>Burnside</option>
-                <option>Calumet Heights</option>
-                <option>Chatham</option>
-                <option>Chicago Lawn</option>
-                <option>Clearing</option>
-                <option>Douglas</option>
-                <option>Dunning</option>
-                <option>East Garfield Park</option>
-                <option>East Side</option>
-                <option>Edgewater</option>
-                <option>Edison Park</option>
-                <option>Englewood</option>
-                <option>Forest Glen</option>
-                <option>Fuller Park</option>
-                <option>Gage Park</option>
-                <option>Garfield Ridge</option>
-                <option>Grand Boulevard</option>
-                <option>Greater Grand Crossing</option>
-                <option>Hegewisch</option>
-                <option>Hermosa</option>
-                <option>Hyde Park</option>
-                <option>Irving Park</option>
-                <option>Jefferson Park</option>
-                <option>Kenwood</option>
-                <option>Lake View</option>
-                <option>Lincoln Park</option>
-                <option>Lincoln Square</option>
-                <option>Logan Square</option>
-                <option>Loop</option>
-                <option>Lower West Side</option>
-                <option>McKinley Park</option>
-                <option>Montclare</option>
-                <option>Morgan Park</option>
-                <option>Mount Greenwood</option>
-                <option>New City</option>
-                <option>North Center</option>
-                <option>North Lawndale</option>
-                <option>North Park</option>
-                <option>Norwood Park</option>
-                <option>Oakland</option>
-                <option>OHare</option>
-                <option>Portage Park</option>
-                <option>Pullman</option>
-                <option>Riverdale</option>
-                <option>Rogers Park</option>
-                <option>Roseland</option>
-                <option>Sauganash</option>
-                <option>South Chicago</option>
-                <option>South Deering</option>
-                <option>South Lawndale</option>
-                <option>South Shore</option>
-                <option>Streeterville</option>
-                <option>The Villa</option>
-                <option>Uptown</option>
-                <option>Washington Heights</option>
-                <option>Washington Park</option>
-                <option>West Elsdon</option>
-                <option>West Englewood</option>
-                <option>West Garfield Park</option>
-                <option>West Lawn</option>
-                <option>West Pullman</option>
-                <option>West Ridge</option>
-                <option>West Town</option>
-                <option>Wicker Park</option>
-                <option>Woodlawn</option>
                 </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3">
@@ -263,7 +177,7 @@ const PreferencesPage = () => {
                 onChange={(e) => setHeating(e.target.value)}>
                 <option></option>
                 <option>Forced Air</option>
-                <option>Radiant</option>
+                <option>Radiant Heat</option>
                 <option>Baseboard</option>
                 <option>Central</option>
                 <option>Electric</option>
@@ -289,6 +203,25 @@ const PreferencesPage = () => {
                 <option>No Parking</option>
                 </Form.Select>
             </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Priorities</Form.Label>
+                <Form.Select 
+                    id="interests"
+                    value={interests}
+                    onChange={(e) => setInterests(e.target.value)}>
+                <option></option>
+                <option>Shopping</option>
+                <option>Restaurants</option>
+                <option>Supermarkets</option>
+                <option>Trails</option>
+                <option>Theatre</option>
+                <option>Movie Theater</option>
+                <option>Night Life</option>
+                <option>Public Transit</option>
+                <option>Cafes</option>
+                <option>Sports</option>
+                </Form.Select>
+            </Form.Group>
             <Button type="submit" id="preference_button">Submit</Button>
         </Form>
         </div>
@@ -296,4 +229,4 @@ const PreferencesPage = () => {
     </>
     )
 }
-export default PreferencesPage
+export default PreferencesPage;
