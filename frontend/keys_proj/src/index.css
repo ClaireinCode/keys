@@ -388,6 +388,7 @@ input {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    color: #775d44;
 }
 
 #details_div {
@@ -448,6 +449,13 @@ input {
     padding: 15px;
     margin-bottom: 10px;
     
+}
+
+#major_deets_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 #minor_deets_div {
@@ -521,6 +529,10 @@ input {
     border: none;
     border-radius: 20px;
     padding: 15px;  
+}
+
+#post_button {
+    color: #775d44;
 }
 
 /* Like/Dislike Page ////////////////////////////////////////////////////////////////////////*/

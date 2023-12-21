@@ -173,8 +173,8 @@ const HousingDetailsPage = () => {
                         </Row>
                     </Container>
                     </div>
-                    <div id="major_deets_div"><h3>${commaPrice} - {house.address.full} - {house.property.yearBuilt}</h3></div>
-                    <div id="remarks_div"><p>{house.privateRemarks.toLowerCase()}</p></div>
+                    <div id="major_deets_div"><h3>${commaPrice} - {house.address.full} - {house.property.yearBuilt}</h3><h3>{house.address.city}, {house.address.state} {house.address.postalCode}</h3></div>
+                    <div id="remarks_div"><p>{house.privateRemarks}</p></div>
                     <div id="minor_deets_div">
                     <Buttons
                     house={house}
@@ -193,7 +193,7 @@ const HousingDetailsPage = () => {
                         <p>Cell: {house.agent.contact.cell}</p>
                         <p>Email: {house.agent.contact.email}</p>
                     </div>
-                    <div id="thoughts"><h4>thoughts</h4></div>
+                    <div id="thoughts"><h4>Thoughts</h4></div>
                     {allThoughts.length > 0 ? (allThoughts.map((thought, index) => (
                         <div key={thought.id} className="thoughts_div"><h5>{thought.username}</h5>{thought.thoughts}</div>))
                     ):( <div className="thoughts_div">No thoughts yet! Care to share yours?</div>)}
@@ -205,7 +205,7 @@ const HousingDetailsPage = () => {
                         onChange={(e) => setThought(e.target.value)}
                         id="thought_textarea"
                     ></textarea>
-                    <input type="submit" value="Post" onClick={postThought}/>
+                    <input type="submit" value="Post" onClick={postThought} id="post_button"/>
                     </form>
                 </div>
                 </>
