@@ -557,7 +557,7 @@ input {
     margin: 1vw;  
     min-width: 400px;
     max-width: 400px;
-    height: 500px;
+    height: 550px;
     border-radius: 20px;
     overflow: hidden;
     border: 3px solid white
@@ -575,7 +575,7 @@ input {
     display: flex;
     background-color: #d9bda4;
     border-radius: 10px;
-    height: 100px;
+    height: 150px;
     padding: 5px;
     color: #775d44;
 }
@@ -641,8 +641,41 @@ input {
     align-items: center;
 }
 
-#personal_thoughts {
+#outer_thoughts {
     margin-top: 7vh;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    justify-content: center;
+    align-items: center;
+}
+
+.thoughts_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: end;
+    height: 90px;
+}
+
+#inner_thoughts {
+    margin-top: 7vh;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    justify-content: left;
+}
+
+#thoughts_delete {
+    position: relative;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    background-color: #bf7a7a;
+    color: whitesmoke;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
 }
 
 /* Account Details Page /////////////////////////////////////////////////////////////////////// */
