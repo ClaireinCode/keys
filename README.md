@@ -1,4 +1,4 @@
-# Keys Real Estate App
+# Keys: A Real Estate App
 
 Welcome to Keys - the real estate app that transforms house hunting into a delightful experience! With Keys, your journey to finding the perfect home is as simple as swiping right.
 
