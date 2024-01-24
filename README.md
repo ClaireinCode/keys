@@ -40,4 +40,10 @@ To get started with Keys, follow these simple steps:
 
 5. **Enjoy the Hunt:** With Keys, home shopping is not just a task, but an enjoyable experience. Swipe right and make your dream home a reality!
 
-Download Keys now and start swiping your way to the home of your dreams! (WIP)
+Download Keys now and start swiping your way to the home of your dreams!
+
+## Background
+
+This project started as a personal project to put my skills to the test. It's still a work in progress with updates and a reworking of the design coming soon!
+
+## Screenshots
