@@ -46,7 +46,7 @@ Download Keys now and start swiping your way to the home of your dreams!
 
 This project started as a personal project to put my skills to the test. It's still a work in progress with updates and a reworking of the design coming soon!
 
-To see what I'm up to in regards to the redesign, check out my work on Figma: https://www.figma.com/file/y7g2AySJdzxqS3iCvHNhM4/Untitled?type=design&node-id=1%3A4&mode=design&t=prj73FBnjP2J7PHw-1
+To see what I'm up to in regards to the redesign, check out my work on Figma: https://www.figma.com/file/y7g2AySJdzxqS3iCvHNhM4/Untitled?type=design&node-id=1%3A3&mode=design&t=prj73FBnjP2J7PHw-1
 
 ## Screenshots
 
