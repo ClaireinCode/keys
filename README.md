@@ -47,3 +47,12 @@ Download Keys now and start swiping your way to the home of your dreams!
 This project started as a personal project to put my skills to the test. It's still a work in progress with updates and a reworking of the design coming soon!
 
 ## Screenshots
+
+![keys_screenshot](./keys_screenshots/Landing.png "Keys Landing Page")
+![keys_screenshot](./keys_screenshots/Signup.png "Keys Sign Up Page")
+![keys_screenshot](./keys_screenshots/login.png "Keys Log In Page")
+![keys_screenshot](./keys_screenshots/houseswiping.png "Keys House Swiping Page")
+![keys_screenshot](./keys_screenshots/housedetails1.png "Keys House Details 1 Page")
+![keys_screenshot](./keys_screenshots/housedetails2.png "Keys House Details 2 Page")
+![keys_screenshot](./keys_screenshots/personalthoughts.png "Keys Personal Thoughts Page")
+
