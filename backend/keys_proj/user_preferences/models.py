@@ -4,21 +4,21 @@ from django.utils import timezone
 # Create your models here.
 
 class Bedrooms(models.TextChoices):
-    studio = 0, 'studio'
-    one = 1, 'one bedroom'
-    two = 2, 'two bedrooms'
-    three = 3, 'three bedrooms'
-    four = 4, 'four bedrooms'
-    five = 5, 'five bedrooms'
-    six = 6, 'six bedrooms'
+    studio = '0', 'studio'
+    one = '1', 'one bedroom'
+    two = '2', 'two bedrooms'
+    three = '3', 'three bedrooms'
+    four = '4', 'four bedrooms'
+    five = '5', 'five bedrooms'
+    six = '6', 'six bedrooms'
 
 class Bathrooms(models.TextChoices):
-    one = 1, 'one bedroom'
-    two = 2, 'two bedrooms'
-    three = 3, 'three bedrooms'
-    four = 4, 'four bedrooms'
-    five = 5, 'five bedrooms'
-    six = 6, 'six bedrooms'
+    one = '1', 'one bedroom'
+    two = '2', 'two bedrooms'
+    three = '3', 'three bedrooms'
+    four = '4', 'four bedrooms'
+    five = '5', 'five bedrooms'
+    six = '6', 'six bedrooms'
 
 class Interests(models.TextChoices):
     shopping = 'shopping', 'Shopping'

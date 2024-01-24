@@ -513,7 +513,7 @@ input {
     width: 100%
 }
 
-.thoughts_div {
+.details_thoughts_div {
     background-color: #d9bda4;
     border-radius: 20px;
     padding: 15px;
@@ -584,7 +584,7 @@ input {
     margin: 2px;
     color: whitesmoke;
     border: none;
-    width: 100%;
+    width: 32%;
     border-radius: 10px;
 }
 
@@ -651,6 +651,11 @@ input {
 }
 
 .thoughts_div {
+    background-color: #d9bda4;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 5px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -664,6 +669,11 @@ input {
     flex-direction: column;
     width: 70%;
     justify-content: left;
+}
+
+#personal_thoughts {
+    margin-top: 3vh;
+    margin-bottom: 10px;
 }
 
 #thoughts_delete {

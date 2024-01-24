@@ -41,10 +41,10 @@ const HousingDetailsPage = () => {
             }
         })
         setHouse(response.data)
-        setZipcode()
     }
 
     const getCoordinates = async () => {
+            
             console.log("zipcode",currentZipcode)
             if (currentZipcode === null || currentZipcode === undefined) {
                 setCurrentZipcode(77077)
@@ -75,7 +75,7 @@ const HousingDetailsPage = () => {
     const setZipcode = () => {
         console.log(house.address.postalCode)
         if (house.address.postalCode !== null){
-            setCurrentZipcode(house.address.postalCode) 
+            setCurrentZipcode(house.address.postalCode)
             getCoordinates()  
         }
     }
@@ -119,6 +119,7 @@ const HousingDetailsPage = () => {
 
     useEffect(() => {
         if (house){
+            setZipcode()
             getCoordinates()
             numberWithCommas()
         }
@@ -203,7 +204,7 @@ const HousingDetailsPage = () => {
                         <button 
                         className="interests_buttons" 
                         key={index}
-                        style={{ backgroundColor: determineButtonColor(interest)}}>
+                        >
                             {interest.poi.categories[0]}: {interest.poi.name}
                         </button>))):( <h5>No interesting places nearby...</h5>)}</div>
                     <div id="contact_div">
@@ -213,8 +214,8 @@ const HousingDetailsPage = () => {
                     </div>
                     <div id="thoughts"><h4>Thoughts</h4></div>
                     {allThoughts.length > 0 ? (allThoughts.map((thought, index) => (
-                        <div key={thought.id} className="thoughts_div"><h5>{thought.username}</h5>{thought.thoughts}</div>))
-                    ):( <div className="thoughts_div">No thoughts yet! Care to share yours?</div>)}
+                        <div key={thought.id} className="details_thoughts_div"><h5>{thought.username}</h5>{thought.thoughts}</div>))
+                    ):( <div className="details_thoughts_div">No thoughts yet! Care to share yours?</div>)}
                     <div id="thought_create_div">
                     <form>
                     <textarea

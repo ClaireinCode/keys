@@ -3,10 +3,11 @@ import Card from 'react-bootstrap/Card';
 import TinderCard from 'react-tinder-card';
 import { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 
 function Liked_Card({cardData, handleClick}) {
   const [commaPrice, setCommaPrice] = useState()
+  const {likes, dislikes} = useOutletContext()
 
   const numberWithCommas = () => {
     setCommaPrice(cardData.listPrice.toLocaleString('en-US'));
@@ -36,6 +37,12 @@ function Liked_Card({cardData, handleClick}) {
           <Button onClick={() => handleClick(cardData.mlsId)} className='liked_buttons'>
             Details
           </Button>
+          {/* <Button onClick={() => handleChangeClick(cardData.mlsId)} className='liked_buttons'>
+            Dislike
+          </Button>
+          <Button onClick={() => handleRemoveClick(cardData.mlsId)} className='liked_buttons'>
+            Remove
+          </Button> */}
         </Card.Footer>
     </Card>
   );

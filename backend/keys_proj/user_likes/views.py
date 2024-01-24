@@ -33,7 +33,7 @@ class All_likes(UserPermissions):
             return Response(status=HTTP_400_BAD_REQUEST)
         
 class A_like(UserPermissions):
-    def get_a_house(self, user, like_id):
+    def get_a_like(self, user, like_id):
         try:
             like = user.user_likes.get(id = like_id)
             return like

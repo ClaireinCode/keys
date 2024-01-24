@@ -151,6 +151,42 @@ const HousingPage = () => {
         navigate(`/house_details/${houses[0].mlsId}`)
     }
 
+    const handleChangeClick = async (house_id) => {
+        let data = {
+            "user_houses":house_id
+        }
+        try {
+            let response = await api
+                .post("user_dislikes/", data)
+                .catch((err) => {
+                    alert("Dislike failed to post")
+                    console.error(err)
+                })
+            if (response && response.status === 201){
+                console.log("successful dislike!")
+                let data = {
+                    "user_houses":houses[0].mlsId
+                }
+                try {
+                    let response = await api
+                        .delete("user_likes/", data)
+                        .catch((err) => {
+                            alert("Like failed to delete")
+                            console.error(err)
+                        })
+                    if (response && response.status === 201){
+                        console.log("successful removal!")
+                    }
+                }catch(error) {
+                    console.log("Error deleting like: ", error)
+                }
+            }
+        }catch(error) {
+            console.log("Error posting dislikes: ", error)
+        }
+    }
+    
+
 
         return (
             <>
